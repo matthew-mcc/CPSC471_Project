@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User, Group
-from itsdangerous import Serializer
 from rest_framework import serializers
 
 #https://www.django-rest-framework.org/tutorial/quickstart/
