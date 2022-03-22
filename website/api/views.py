@@ -12,17 +12,24 @@ from api.serializers import GroupSerializer
 #THIS IS THE ENDPOINT SECTION
 
 
-class UserList(viewsets.ModelViewSet):
+class UserDetails(viewsets.ModelViewSet):
 
     """
     API "ENDPOINT" that allows for users to be viewed or edited
     """
 
-    queryset = User.objects.all().order_by('-date_joined')
+    # This is from the quickstart guide
+    queryset = User.objects.all().order_by('username') #can be order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class GroupList(viewsets.ModelViewSet):
+    #this is from tutorial
+    # def get(self, request, pk, format=None):
+    #     user = User.objects.get(pk=pk)
+    #     serializer = UserSerializer(user)
+    #     return Response(serializer.data)
+
+class GroupDetails(viewsets.ModelViewSet):
 
     """
     API endpoint that allows for groups to be viewed or edited
@@ -33,3 +40,6 @@ class GroupList(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
+def home_view(request):
+
+    return render(request, "home.html")
