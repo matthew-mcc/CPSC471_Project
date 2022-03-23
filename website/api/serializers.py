@@ -1,4 +1,8 @@
 from django.contrib.auth.models import User, Group
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 from rest_framework import serializers
 
 #https://www.django-rest-framework.org/tutorial/quickstart/
