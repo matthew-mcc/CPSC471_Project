@@ -1,6 +1,8 @@
 #from django.contrib.auth.models import User, Group
-from base.models import Item, Part
+from base.models import User
 from rest_framework import serializers
+
+
 
 
 #https://www.django-rest-framework.org/tutorial/quickstart/
@@ -22,13 +24,9 @@ from rest_framework import serializers
 
 #convert instances of objects into data types the response object can understand
 
-class ItemSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Item
+        model = User
         fields = '__all__'
 
-
-class PartSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Part
-        fields = '__all__'
