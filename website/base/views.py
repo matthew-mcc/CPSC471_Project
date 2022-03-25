@@ -42,3 +42,7 @@ def showSignIn(request):
         form = SignupForm()
         context = {'form':form, 'submitbutton': submitbutton}
         return render(request, 'signin.html', context)
+
+
+def showBuildPage(request):
+    return render (request, 'build.html')

@@ -22,10 +22,10 @@
 
         .navbar {
             width:12%;
-            height: 120vh;
+            height: 100vh;
             position: fixed;
             margin-left:-12%;
-            background-color: cadetblue;
+            background-color: black;
             transition: 0.4s;
         }
 
@@ -68,14 +68,16 @@
 <body style="background-color: rgb(76, 99, 99);">
     <div class="wrapper">
         <nav class = "navbar navbar-expand-lg d-flex flex-column align-item-start" id = "sidebar">
-            <div style = "color: black; font-size: x-large; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">PC Monkee Builder</div>
+           <a href = '../' class = "link-light;" style="text-decoration: none;" >
+               <div style = "color:white; font-size: x-large; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">PC Monke Builder</div>
+           </a>
             <ul class = "navbar-nav d-flex flex-column mt-5" style = "color: rgb(76, 99, 99);">
                 <li>
-                    <a href = '../' class="link-light">Home</a>
+                    <a href = '../' class="link-light;" style="text-decoration: none; color: whitesmoke;">View Recommendations</a>
                 </li>
                 <br>
                 <li>
-                    <a href = '#' class="link-light">Build</a>
+                    <a href = '#' class="link-light;" style="text-decoration: none; color: whitesmoke;">Build</a>
                 </li>
 
             </ul>
@@ -85,8 +87,7 @@
         </section>
 
             <div class="text-center mt-5" style="padding-top:10%; padding-left: 34%;">
-                <h1 style = "color: black; font-size: xx-large; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">PC Monke Builder</h1>
-                <p style = "color: black;"> Account Creation</p>
+                <h1 style = "color: black; font-size: xx-large; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Account Creation</h1>
                 <form method="POST" action="">
                     {% csrf_token %}
                     <div class="form-floating mb-4" style="text-align: center;">
