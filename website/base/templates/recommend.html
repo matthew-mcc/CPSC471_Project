@@ -11,45 +11,6 @@
         p {
             text-align: center;
         }
-
-
-        .wrapper {
-            display: flex;
-            width: 100%;
-            align-items: stretch;
-        }
-
-        .navbar {
-            width: 12%;
-            height: 100vh;
-            position: fixed;
-            margin-left: -12%;
-            background-color: black;
-            transition: 0.4s;
-        }
-
-        .nav-link {
-
-            font-size: 1.2em;
-        }
-
-        .nav-link:active,
-        .nav-link:focus,
-        .nav-link:hover {
-            background-color: cadetblue;
-        }
-
-        .my-container {
-            transition: 0.4;
-        }
-
-        .active-nav {
-            margin-left: 0;
-        }
-
-        .active-cont {
-            margin-left: 12%
-        }
     </style>
 
     <meta charset="utf-8">
@@ -108,7 +69,7 @@
                         {% csrf_token %}
                         <div class="form-floating mb-4" style="text-align: center;">
                             {{form.budget}}
-                            <label for="floatingInput" class="sr-only" style="color: black;"> Budget</label>
+                            <label for="floatingInput" class="sr-only" style="color: black;"> Budget($CAD)</label>
                         </div>
                         <div class="form-floating mb-4" style="text-align: center; color: black;">
                             {{form.choice}}
