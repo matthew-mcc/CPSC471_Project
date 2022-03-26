@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import SignupForm, LoginForm
+from .forms import RecommendForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
 
 def showHome(request):
@@ -15,15 +15,15 @@ def showSignUp(request):
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
-        if(form.is_valid()):
+        if form.is_valid():
             username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             #newUser = User.objects.create_user(username,email,password)
     else:
         form = SignupForm()
-        context = {'form':form, 'submitbutton': submitbutton}
-        return render(request, 'newaccount.html', context)
+    context = {'form':form, 'submitbutton': submitbutton}
+    return render(request, 'newaccount.html', context)
 
 
 def showSignIn(request):
@@ -34,15 +34,28 @@ def showSignIn(request):
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
-        if(form.is_valid()):
+        if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             #newUser = User.objects.create_user(username,email,password)
     else:
         form = SignupForm()
-        context = {'form':form, 'submitbutton': submitbutton}
-        return render(request, 'signin.html', context)
+    context = {'form':form, 'submitbutton': submitbutton}
+    return render(request, 'signin.html', context)
 
 
 def showBuildPage(request):
     return render (request, 'build.html')
+
+def showRecommendedPage(request):
+    submitbutton = request.POST.get("submit")
+
+    if request.method == 'POST':
+        form = RecommendForm(request.POST)
+        if form.is_valid():
+            budget = form.cleaned_data.get("budget")
+            choice = form.cleaned_data.get("choice")
+    else:
+        form = RecommendForm()
+    context = {'form':form, 'submitbutton':submitbutton}
+    return render (request, 'recommend.html', context)
