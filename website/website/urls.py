@@ -34,6 +34,7 @@ urlpatterns = [
     path('signin/', views.showSignIn, name = 'signin'),
     path('build/', views.showBuildPage, name = 'build'),
     path('recommend/', views.showRecommendedPage, name = 'recommend'),
+   
 
     # path('', views.home_view),
     # path('', TemplateView.as_view(template_name='home.html'), name="home"),
