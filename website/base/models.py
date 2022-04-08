@@ -25,6 +25,9 @@ class CPU(models.Model):
     core_count = models.IntegerField()
     core_clock = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.model_name
+
 class GPU(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     power_usage = models.IntegerField()
@@ -35,6 +38,9 @@ class GPU(models.Model):
     bus_slots = models.CharField(max_length=50)
     core_count = models.IntegerField()
     core_clock = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.model_name
 
 class MotherBoard(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
@@ -50,10 +56,16 @@ class MotherBoard(models.Model):
     lan = models.CharField(max_length=50)
     wireless = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.model_name
+
 class PowerSupply(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     modularity = models.CharField(max_length=50)
     output = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.model_name
 
 class Memory(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
@@ -62,6 +74,9 @@ class Memory(models.Model):
     speed = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
     no_sticks = models.IntegerField()
+    
+    def __str__(self):
+        return self.model_name
 
 class Storage(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
@@ -73,6 +88,9 @@ class Storage(models.Model):
     hdd = models.CharField(max_length=50)
     m2 = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.model_name
+
 class Case(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     chassis_type = models.CharField(max_length=50)
@@ -81,13 +99,22 @@ class Case(models.Model):
     rear_radiator = models.CharField(max_length=50)
     front_radiator = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.model_name
+
 class AirCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     radiator_size =models.CharField(max_length=50)
     location = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.model_name
 
 class LiquidCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     height = models.CharField(max_length=50)
     fan_output = models.CharField(max_length=50)
     fan_speed = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.model_name

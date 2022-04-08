@@ -14,7 +14,7 @@ from .serializers import UserSerializer
     DELETE -> Remove Specific Record
 """
 
-
+# so now these views dont matter?
 
 class UserList(APIView):
 

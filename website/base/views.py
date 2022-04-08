@@ -1,10 +1,20 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import RecommendForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
+from .models import CPU
 
 def showHome(request):
 
     return render (request, 'home.html')
+
+
+def get_cpu(request):
+    latest_cpu_list = CPU.objects.all()
+    
+    context = {'latest_cpu_list': latest_cpu_list}
+    return render(request, 'index.html', context)
+
 
 def showSignUp(request):
     submitbutton = request.POST.get("submit")
