@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import RecommendForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
-from .models import CPU
+from .models import CPU, User
 
 def showHome(request):
 
@@ -14,6 +14,7 @@ def get_cpu(request):
     
     context = {'latest_cpu_list': latest_cpu_list}
     return render(request, 'index.html', context)
+
 
 
 def showSignUp(request):
@@ -30,6 +31,8 @@ def showSignUp(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             #newUser = User.objects.create_user(username,email,password)
+            newUser = User(username=username, email=email, password=password)
+            newUser.save()
     else:
         form = SignupForm()
     context = {'form':form, 'submitbutton': submitbutton}
@@ -48,6 +51,8 @@ def showSignIn(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             #newUser = User.objects.create_user(username,email,password)
+
+        
     else:
         form = SignupForm()
     context = {'form':form, 'submitbutton': submitbutton}

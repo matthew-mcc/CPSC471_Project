@@ -1,7 +1,7 @@
 {% if latest_cpu_list %}
     <ul>
     {% for cpu in latest_cpu_list %}
-        <li><a href="/base/{{ cpu.model_name }}/">{{ cpu.model_name }}</a></li>
+        <li><a href="/base/{{ cpu.model_name }}/">{{ cpu.chipset }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
