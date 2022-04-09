@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from rest_framework.schemas import get_schema_view
 from django.contrib import admin
 from django.urls import include, path
 from api import views
@@ -25,7 +27,6 @@ from django.views.generic.base import TemplateView
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserDetails)
 # router.register(r'groups', views.GroupDetails)
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,5 +51,11 @@ urlpatterns = [
     # path('', include(router.urls)),
    
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-    
+
+    path('openapi', get_schema_view(
+        title="MonkeBuilderAPI",
+        description="API for PC builder site",
+        version="1.0.0"
+    ), name='openapi-schema'),
+
 ]
