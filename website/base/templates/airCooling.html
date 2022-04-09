@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Height</th>
                                 <th scope="col">Fan Output</th>
                                 <th scope="col">Fan Speed</th>
@@ -86,6 +87,7 @@
                             {% for ac in ac_list %}
                             <tr>
                                 <td>{{ ac.model_name}}</td>
+                                <td>{{ ac.price}}</td>
                                 <td>{{ ac.height}}</td>
                                 <td>{{ ac.fan_output}}</td>
                                 <td>{{ ac.fan_speed}}</td>

@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Modularity</th>
                                 <th scope="col">Power Output(W)</th>
                                 
@@ -85,6 +86,7 @@
                             {% for psu in psu_list %}
                             <tr>
                                 <td>{{ psu.model_name}}</td>
+                                <td>{{ psu.price}}</td>
                                 <td>{{ psu.modularity}}</td>
                                 <td>{{ psu.output}}</td>
                                 

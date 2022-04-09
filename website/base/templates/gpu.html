@@ -76,6 +76,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Power Usage(W)</th>
                                 <th scope="col">Architecture</th>
                                 <th scope="col">Chipset</th>
@@ -91,6 +92,7 @@
                             {% for gpu in gpu_list %}
                             <tr>
                                 <td>{{ gpu.model_name}}</td>
+                                <td>{{ gpu.price}}</td>
                                 <td>{{ gpu.power_usage}}</td>
                                 <td>{{ gpu.architecture}}</td>
                                 <td>{{ gpu.chipset}}</td>

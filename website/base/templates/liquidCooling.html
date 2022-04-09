@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Radiator Size</th>
                                 <th scope="col">Location</th>
                                 <th scope="col"></th>
@@ -84,6 +85,7 @@
                             {% for lc in lc_list %}
                             <tr>
                                 <td>{{ lc.model_name}}</td>
+                                <td>{{ lc.price}}</td>
                                 <td>{{ lc.radiator_size}}</td>
                                 <td>{{ lc.location}}</td>
                                 <td><button>Select</button></td>

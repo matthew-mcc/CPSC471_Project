@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Power Usage(W)</th>
                                 <th scope="col">Graphics</th>
                                 <th scope="col">Chipset</th>
@@ -87,6 +88,7 @@
                             {% for cpu in latest_cpu_list %}
                             <tr>
                                 <td>{{ cpu.model_name}}</td>
+                                <td>{{ cpu.price}}</td>
                                 <td>{{ cpu.power_usage}}</td>
                                 <td>{{ cpu.graphics}}</td>
                                 <td>{{ cpu.chipset}}</td>

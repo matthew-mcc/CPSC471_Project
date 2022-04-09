@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Power Usage(W)</th>
                                 <th scope="col">Storage Size</th>
                                 <th scope="col">Form Factor</th>
@@ -89,6 +90,7 @@
                             {% for sto in storage_list %}
                             <tr>
                                 <td>{{ sto.model_name}}</td>
+                                <td>{{ sto.price}}</td>
                                 <td>{{ sto.power_usage}}</td>
                                 <td>{{ sto.storage_size}}</td>
                                 <td>{{ sto.form_factor}}</td>

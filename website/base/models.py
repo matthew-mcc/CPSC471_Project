@@ -8,10 +8,29 @@ class User(models.Model):
     username = models.CharField(max_length=50)
     password = models.CharField(max_length=200)
     email = models.CharField(max_length=50)
+    build_id = models.IntegerField()
     #name = models.CharField(max_length=50)
 
     #dont really understand how to do primary keys...
     #userID = models.BigAutoField(primary_key=True)
+
+class Build(models.Model):
+    build_id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=50)
+    total_price = models.IntegerField()
+    build_cpu = models.CharField(max_length=50)
+    build_gpu = models.CharField(max_length=50)
+    build_motherboard = models.CharField(max_length=50)
+    build_psu = models.CharField(max_length=50)
+    build_ram = models.CharField(max_length=50)
+    build_storage1 = models.CharField(max_length=50)
+    build_storage2 = models.CharField(max_length=50)
+    build_case = models.CharField(max_length=50)
+    build_liquidCooling = models.CharField(max_length=50)
+    build_airCooling = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 class Recipient(models.Model):
     email = models.CharField(max_length=50)
@@ -19,6 +38,8 @@ class Recipient(models.Model):
 
 class CPU(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
+    
     power_usage = models.IntegerField()
     graphics = models.CharField(max_length=100)
     chipset = models.CharField(max_length=50)
@@ -30,6 +51,7 @@ class CPU(models.Model):
 
 class GPU(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     power_usage = models.IntegerField()
     architecture = models.CharField(max_length=50)
     chipset = models.CharField(max_length=50)
@@ -44,6 +66,7 @@ class GPU(models.Model):
 
 class MotherBoard(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     power_usage = models.IntegerField()
     form_factor = models.CharField(max_length=50)
     chipset = models.CharField(max_length=50)
@@ -61,6 +84,7 @@ class MotherBoard(models.Model):
 
 class PowerSupply(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     modularity = models.CharField(max_length=50)
     output = models.CharField(max_length=50)
 
@@ -69,6 +93,7 @@ class PowerSupply(models.Model):
 
 class Memory(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     power_usage = models.CharField(max_length=50)
     size = models.CharField(max_length=50)
     speed = models.CharField(max_length=50)
@@ -80,6 +105,7 @@ class Memory(models.Model):
 
 class Storage(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     power_usage= models.CharField(max_length=50)
     storage_size = models.CharField(max_length=50)
     form_factor =models.CharField(max_length=50)
@@ -93,6 +119,7 @@ class Storage(models.Model):
 
 class Case(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     chassis_type = models.CharField(max_length=50)
     form_factor =models.CharField(max_length=50)
     top_radiator = models.CharField(max_length=50)
@@ -104,6 +131,7 @@ class Case(models.Model):
 
 class LiquidCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     radiator_size = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
 
@@ -112,6 +140,7 @@ class LiquidCooling(models.Model):
 
 class AirCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
+    price = models.IntegerField()
     height = models.CharField(max_length=50)
     fan_output = models.CharField(max_length=50)
     fan_speed = models.CharField(max_length=50)

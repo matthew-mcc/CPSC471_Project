@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Chassis Type</th>
                                 <th scope="col">Form Factor</th>
                                 <th scope="col">Top Radiator</th>
@@ -87,6 +88,7 @@
                             {% for case in case_list %}
                             <tr>
                                 <td>{{ case.model_name}}</td>
+                                <td>{{ case.price}}</td>
                                 <td>{{ case.chassis_type}}</td>
                                 <td>{{ case.form_factor}}</td>
                                 <td>{{ case.top_radiator}}</td>

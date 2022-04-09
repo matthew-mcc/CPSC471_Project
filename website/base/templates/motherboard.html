@@ -75,6 +75,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">Model</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Power Usage(W)</th>
                                 <th scope="col">Form Factor</th>
                                 <th scope="col">Chipset</th>
@@ -93,6 +94,7 @@
                             {% for mb in motherboard_list %}
                             <tr>
                                 <td>{{ mb.model_name}}</td>
+                                <td>{{ mb.price}}</td>
                                 <td>{{ mb.power_usage}}</td>
                                 <td>{{ mb.form_factor}}</td>
                                 <td>{{ mb.chipset}}</td>

@@ -34,6 +34,9 @@ def get_psu(request):
 def get_ram(request):
     ram_list = Memory.objects.all()
     context = {'ram_list': ram_list}
+
+   
+
     return render(request, 'memory.html', context)
 
 def get_storage(request):
@@ -54,6 +57,10 @@ def get_airCool(request):
 def get_liquidCool(request):
     lc_list = LiquidCooling.objects.all()
     context = {'lc_list': lc_list}
+
+    #test = LiquidCooling(model_name='is this here?', price=1000, radiator_size='a', location='b')
+    #test.save()
+
     return render(request, 'liquidCooling.html', context)
 
 def showSignUp(request):
