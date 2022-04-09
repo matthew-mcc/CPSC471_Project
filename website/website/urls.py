@@ -34,7 +34,8 @@ urlpatterns = [
     path('signin/', views.showSignIn, name = 'signin'),
     path('build/', views.showBuildPage, name = 'build'),
     path('recommend/', views.showRecommendedPage, name = 'recommend'),
-    path('index/', views.get_cpu)
+    path('cpu/', views.get_cpu, name = 'cpu'),
+    path('gpu/', views.get_gpu, name = 'gpu'),
    
 
     # path('', views.home_view),

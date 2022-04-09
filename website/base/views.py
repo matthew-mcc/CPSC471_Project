@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .forms import RecommendForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
-from .models import CPU, User
+from .models import CPU, User, GPU
 
 def showHome(request):
 
@@ -13,8 +13,13 @@ def get_cpu(request):
     latest_cpu_list = CPU.objects.all()
     
     context = {'latest_cpu_list': latest_cpu_list}
-    return render(request, 'index.html', context)
+    return render(request, 'cpu.html', context)
 
+def get_gpu(request):
+    gpu_list = GPU.objects.all()
+    
+    context = {'gpu_list': gpu_list}
+    return render(request, 'gpu.html', context)
 
 
 def showSignUp(request):
@@ -30,9 +35,10 @@ def showSignUp(request):
             username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-            #newUser = User.objects.create_user(username,email,password)
+            newUser = User.objects.create_user()
             newUser = User(username=username, email=email, password=password)
             newUser.save()
+            return redirect('../signin')
     else:
         form = SignupForm()
     context = {'form':form, 'submitbutton': submitbutton}
@@ -50,7 +56,6 @@ def showSignIn(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            #newUser = User.objects.create_user(username,email,password)
 
         
     else:
