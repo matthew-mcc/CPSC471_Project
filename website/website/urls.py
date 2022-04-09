@@ -36,6 +36,13 @@ urlpatterns = [
     path('recommend/', views.showRecommendedPage, name = 'recommend'),
     path('cpu/', views.get_cpu, name = 'cpu'),
     path('gpu/', views.get_gpu, name = 'gpu'),
+    path('motherboard/', views.get_motherboard, name='motherboard'),
+    path('psu/', views.get_psu, name='psu'),
+    path('memory/', views.get_ram, name='memory'),
+    path('storage/', views.get_storage, name='storage'),
+    path('case/', views.get_case, name='case'),
+    path('liquidCooling/', views.get_liquidCool, name='liquidCooling'),
+    path('airCooling/', views.get_airCool, name='airCooling'),
    
 
     # path('', views.home_view),

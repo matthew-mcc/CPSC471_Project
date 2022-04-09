@@ -102,15 +102,15 @@ class Case(models.Model):
     def __str__(self):
         return self.model_name
 
-class AirCooling(models.Model):
+class LiquidCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
-    radiator_size =models.CharField(max_length=50)
+    radiator_size = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
 
     def __str__(self):
         return self.model_name
 
-class LiquidCooling(models.Model):
+class AirCooling(models.Model):
     model_name = models.CharField(primary_key=True, max_length=50)
     height = models.CharField(max_length=50)
     fan_output = models.CharField(max_length=50)

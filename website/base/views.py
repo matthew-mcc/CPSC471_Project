@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import RecommendForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
-from .models import CPU, User, GPU
+from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, User, GPU, Memory, Storage, Case
 
 def showHome(request):
 
@@ -21,6 +21,40 @@ def get_gpu(request):
     context = {'gpu_list': gpu_list}
     return render(request, 'gpu.html', context)
 
+def get_motherboard(request):
+    motherboard_list = MotherBoard.objects.all()
+    context = {'motherboard_list': motherboard_list}
+    return render(request, 'motherboard.html', context)
+
+def get_psu(request):
+    psu_list = PowerSupply.objects.all()
+    context = {'psu_list': psu_list}
+    return render(request, 'psu.html', context)
+
+def get_ram(request):
+    ram_list = Memory.objects.all()
+    context = {'ram_list': ram_list}
+    return render(request, 'memory.html', context)
+
+def get_storage(request):
+    storage_list = Storage.objects.all()
+    context = {'storage_list': storage_list}
+    return render(request, 'storage.html', context)
+
+def get_case(request):
+    case_list = Case.objects.all()
+    context = {'case_list': case_list}
+    return render(request, 'case.html', context)
+
+def get_airCool(request):
+    ac_list = AirCooling.objects.all()
+    context = {'ac_list': ac_list}
+    return render(request, 'airCooling.html', context)
+
+def get_liquidCool(request):
+    lc_list = LiquidCooling.objects.all()
+    context = {'lc_list': lc_list}
+    return render(request, 'liquidCooling.html', context)
 
 def showSignUp(request):
     submitbutton = request.POST.get("submit")
