@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from os import stat
+
+from rest_framework.schemas import get_schema_view
 from django.contrib import admin
 from django.urls import include, path
 from api import views
@@ -27,7 +29,6 @@ from django.views.generic.base import TemplateView
 # router = routers.DefaultRouter()
 # router.register(r'users', views.UserDetails)
 # router.register(r'groups', views.GroupDetails)
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,6 +46,11 @@ urlpatterns = [
     path('case/', views.get_case, name='case'),
     path('liquidCooling/', views.get_liquidCool, name='liquidCooling'),
     path('airCooling/', views.get_airCool, name='airCooling'),
+    path('openapi', get_schema_view(
+        title="MonkeBuilderAPI",
+        description="API for PC builder site",
+        version="1.0.0"
+    ), name='openapi-schema'),
    
 
     # path('', views.home_view),
@@ -56,3 +62,5 @@ urlpatterns = [
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+
