@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -30,6 +31,7 @@
         style="background-color: black;">
         <div class="offcanvas-header">
             <h6 class="offcanvas-title" style="color: white;">Monke PC Builder</h6>
+            <img src="{% static 'Monkee.svg' %}" width="40%" />
             <button style="background-color:white" type="button" class="btn-close text-reset"
                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -50,6 +52,23 @@
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Recommendation Center</span>
                     </a>
                 </li>
+                <li class="btn-group dropend">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: white;">
+                        <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Search Parts</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="parts-dropdown"
+                        style="background-color: rgb(76, 99, 99);">
+                        <li><a href="../cpu" class="dropdown-item" style="color: white;">CPUS</a></li>
+                        <li><a href="../gpu" class="dropdown-item" style="color: white;">GPUS</a></li>
+                        <li><a href="../motherboard" class="dropdown-item" style="color: white;">Motherboards</a></li>
+                        <li><a href="../psu" class="dropdown-item" style="color: white;">PSUS</a></li>
+                        <li><a href="../memory" class="dropdown-item" style="color: white;">RAM</a></li>
+                        <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
+                        <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
+                        <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -61,7 +80,7 @@
                     type="button:">
                     Monke Menu
                 </button>
-                <div class="text-center mt-5" style="padding-left: 35%; padding-right: 35%; padding-top: 10%;" >
+                <div class="text-center mt-5" style="padding-left: 35%; padding-right: 35%; padding-top: 10%;">
                     <h1
                         style="color: black; font-size: xx-large; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
                         Account Login</h1>
@@ -90,8 +109,14 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 
 

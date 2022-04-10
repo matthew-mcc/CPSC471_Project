@@ -1,3 +1,4 @@
+from urllib.parse import uses_relative
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from .forms import RecommendForm, SignupForm, LoginForm
@@ -88,7 +89,6 @@ def showSignUp(request):
 
 def showSignIn(request):
     submitbutton = request.POST.get("submit")
-
     username =''
     password = ''
 
@@ -97,6 +97,7 @@ def showSignIn(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            usercheck = User.objects.filter(username = username, password = password)
 
         
     else:

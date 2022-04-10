@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from os import stat
 from django.contrib import admin
 from django.urls import include, path
 from api import views
 from base import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from rest_framework import routers
 
@@ -52,3 +54,5 @@ urlpatterns = [
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     
 ]
+
+urlpatterns += staticfiles_urlpatterns()
