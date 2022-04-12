@@ -72,7 +72,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -106,15 +107,18 @@
                         <tbody>
                             {% for cpu in latest_cpu_list %}
                             <tr>
-                                <form action = "" method = "get">
-                                <td>{{ cpu.model_name}}</td>
-                                <td>{{ cpu.price}}</td>
-                                <td>{{ cpu.power_usage}}</td>
-                                <td>{{ cpu.graphics}}</td>
-                                <td>{{ cpu.chipset}}</td>
-                                <td>{{ cpu.core_count}}</td>
-                                <td>{{ cpu.core_clock}}</td>
-                                <td><input type = "submit" value = "Select"></td>
+                                <form action="" method="get">
+                                    <td><input name="model" id="model" value="{{ cpu.model_name}}" readonly
+                                            class="form-control-plaintext" type="text"
+                                            style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                    </td>
+                                    <td>{{ cpu.price}}</td>
+                                    <td>{{ cpu.power_usage}}</td>
+                                    <td>{{ cpu.graphics}}</td>
+                                    <td>{{ cpu.chipset}}</td>
+                                    <td>{{ cpu.core_count}}</td>
+                                    <td>{{ cpu.core_clock}}</td>
+                                    <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
                                 </form>
                             </tr>
                             {% endfor %}

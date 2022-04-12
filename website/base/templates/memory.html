@@ -72,7 +72,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -106,14 +107,17 @@
                         <tbody>
                             {% for ram in ram_list %}
                             <tr>
-                                <td>{{ ram.model_name}}</td>
+                                <td><input name="model" id="model" value="{{ram.model_name}}" readonly
+                                        class="form-control-plaintext" type="text"
+                                        style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                </td>
                                 <td>{{ ram.price}}</td>
                                 <td>{{ ram.power_usage}}</td>
                                 <td>{{ ram.size}}</td>
                                 <td>{{ ram.speed}}</td>
                                 <td>{{ ram.type}}</td>
                                 <td>{{ ram.no_sticks}}</td>
-                                <td><button>Select</button></td>
+                                <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
                             </tr>
                             {% endfor %}
                         </tbody>

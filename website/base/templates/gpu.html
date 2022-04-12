@@ -72,7 +72,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -110,7 +111,10 @@
                         <tbody>
                             {% for gpu in gpu_list %}
                             <tr>
-                                <td>{{ gpu.model_name}}</td>
+                                <td><input name="model" id="model" value="{{gpu.model_name}}" readonly
+                                        class="form-control-plaintext" type="text"
+                                        style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                </td>
                                 <td>{{ gpu.price}}</td>
                                 <td>{{ gpu.power_usage}}</td>
                                 <td>{{ gpu.architecture}}</td>
@@ -120,7 +124,7 @@
                                 <td>{{ gpu.bus_slots}}</td>
                                 <td>{{ gpu.core_count}}</td>
                                 <td>{{ gpu.core_clock}}</td>
-                                <td><button>Select</button></td>
+                                <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
                             </tr>
                             {% endfor %}
                         </tbody>

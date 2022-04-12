@@ -104,11 +104,14 @@
                         <tbody>
                             {% for lc in lc_list %}
                             <tr>
-                                <td>{{ lc.model_name}}</td>
+                                <td><input name="model" id="model" value="{{lc.model_name}}" readonly
+                                        class="form-control-plaintext" type="text"
+                                        style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                </td>
                                 <td>{{ lc.price}}</td>
                                 <td>{{ lc.radiator_size}}</td>
                                 <td>{{ lc.location}}</td>
-                                <td><button>Select</button></td>
+                                <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
                             </tr>
                             {% endfor %}
                         </tbody>
