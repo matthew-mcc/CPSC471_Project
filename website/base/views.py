@@ -1,9 +1,12 @@
+from distutils.command.build import build
 from urllib.parse import uses_relative
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .forms import RecommendForm, SignupForm, LoginForm
+from .forms import RecommendForm, RecoveryForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
-from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, User, GPU, Memory, Storage, Case
+from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, User, GPU, Memory, Storage, Case, Build
+from django.conf import settings
+from django.core.mail import send_mail
 
 def showHome(request):
 
@@ -12,7 +15,6 @@ def showHome(request):
 
 def get_cpu(request):
     latest_cpu_list = CPU.objects.all()
-    
     context = {'latest_cpu_list': latest_cpu_list}
     return render(request, 'cpu.html', context)
 
@@ -121,3 +123,21 @@ def showRecommendedPage(request):
         form = RecommendForm()
     context = {'form':form, 'submitbutton':submitbutton}
     return render (request, 'recommend.html', context)
+
+def showRecoveryPage(request):
+    submitbutton = request.POST.get("submit")
+    email = ''
+    if request.method == 'POST':
+        form = RecoveryForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get("email")     
+            subject = 'Monkee PC Builder Password Recovery'
+            message = 'Hey there, You forgot your password, here it is!'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            send_mail( subject = subject, message = message, from_email=email_from, recipient_list = recipient_list )
+            return redirect('../')
+    else:
+        form = RecoveryForm()
+    context = {'form':form, 'submitbutton':submitbutton}
+    return render (request, 'recovery.html', context)

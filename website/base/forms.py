@@ -13,3 +13,6 @@ class LoginForm(forms.Form):
 class RecommendForm(forms.Form):
     budget = forms.CharField(widget= forms.TextInput(attrs={'class': 'form-control', 'placeholder' : 'Budget', 'id' : 'floatingInput', 'type': 'number'}))
     choice = forms.ChoiceField(choices = (("1", "Gaming"), ("2", "Streaming"), ("3", "Office")), widget= forms.RadioSelect(attrs={'id' : 'FloatingInput'}))
+
+class RecoveryForm(forms.Form):
+    email = forms.CharField(widget = forms.EmailInput(attrs={'class': 'form-control', 'placeholder' : 'Email', 'id' : 'floatingInput'}))
