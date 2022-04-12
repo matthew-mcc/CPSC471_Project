@@ -4,7 +4,7 @@ from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect, render
 from .forms import RecommendForm, RecoveryForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
-from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, User, GPU, Memory, Storage, Case, Build
+from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, GPU, Memory, Storage, Case, Build
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -18,7 +18,6 @@ def showHome(request):
 def get_cpu(request):
     latest_cpu_list = CPU.objects.all()
     context = {'latest_cpu_list': latest_cpu_list}
-    model = request.GET
     # cpu = Build.objects.get(build_id = 0)
     # cpu.build_cpu = model.get('model')
     # cpu.save()
@@ -89,8 +88,6 @@ def showSignUp(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(username, email,password)
-            # newUser = User(username=username, email=email,
-            #                password=password, build_id=0)
             # build = Build(build_id=0, name='', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
             #               build_ram='',
             #               build_storage1='',
@@ -99,7 +96,6 @@ def showSignUp(request):
             #               build_liquidCooling='',
             #               build_airCooling=''
             #               )
-            # newUser.save()
             # build.save()
             return redirect('../signin')
     else:

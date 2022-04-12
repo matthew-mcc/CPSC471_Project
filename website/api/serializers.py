@@ -27,10 +27,6 @@ from rest_framework import serializers
 #convert instances of objects into data types the response object can understand
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = '__all__'
 
 class RecipientSerializer(serializers.ModelSerializer):
     class Meta:

@@ -105,6 +105,7 @@
                         <tbody>
                             {% for psu in psu_list %}
                             <tr>
+                                <form action="" method="get">
                                 <td><input name="model" id="model" value="{{psu.model_name}}" readonly
                                         class="form-control-plaintext" type="text"
                                         style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
@@ -115,6 +116,7 @@
 
 
                                 <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
+                            </form>
                             </tr>
                             {% endfor %}
                         </tbody>

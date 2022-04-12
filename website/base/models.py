@@ -3,16 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-# as per ER diagram
-class User(models.Model):
-    username = models.CharField(max_length=50)
-    password = models.CharField(max_length=200)
-    email = models.CharField(max_length=50)
-    build_id = models.IntegerField()
-    #name = models.CharField(max_length=50)
-
-    #dont really understand how to do primary keys...
-    #userID = models.BigAutoField(primary_key=True)
 
 class Build(models.Model):
     build_id = models.IntegerField(primary_key=True)
