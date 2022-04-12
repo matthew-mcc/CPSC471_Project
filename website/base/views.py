@@ -1,4 +1,5 @@
 from distutils.command.build import build
+import re
 from urllib.parse import uses_relative
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect, render
@@ -8,6 +9,7 @@ from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, GP
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 
 def showHome(request):
@@ -18,9 +20,8 @@ def showHome(request):
 def get_cpu(request):
     latest_cpu_list = CPU.objects.all()
     context = {'latest_cpu_list': latest_cpu_list}
-    # cpu = Build.objects.get(build_id = 0)
-    # cpu.build_cpu = model.get('model')
-    # cpu.save()
+    model = request.GET
+    print(model.get('model'))
     return render(request, 'cpu.html', context)
 
 
@@ -110,14 +111,22 @@ def showSignIn(request):
     password = ''
 
     if request.method == 'POST':
-        form = SignupForm(request.POST)
+        logout(request)
+        form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            usercheck = User.objects.get(username=username)
+            user = authenticate(username = username, password = password)
+            if user is not None:
+                login(request, user)
+                print(request.user.username)
+                return redirect('../')
+            else:
+                messages.error(request, "This user does not exist")
+                redirect('signin')
 
     else:
-        form = SignupForm()
+        form = LoginForm()
     context = {'form': form, 'submitbutton': submitbutton}
     return render(request, 'signin.html', context)
 
