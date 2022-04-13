@@ -106,12 +106,15 @@
                             {% for ac in ac_list %}
                             <tr>
                                 <form action="" method="get">
-                                <td>{{ ac.model_name}}</td>
+                                    <td><input name="model" id="model" value="{{ac.model_name}}" readonly
+                                        class="form-control-plaintext" type="text"
+                                        style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                </td>
                                 <td>{{ ac.price}}</td>
                                 <td>{{ ac.height}}</td>
                                 <td>{{ ac.fan_output}}</td>
                                 <td>{{ ac.fan_speed}}</td>        
-                                <td><button>Select</button></td>
+                                <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
                                 </form>
                             </tr>
                             {% endfor %}
