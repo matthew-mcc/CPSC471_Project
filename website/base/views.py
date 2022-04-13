@@ -257,15 +257,32 @@ def getRecommendedBuild(budget, choice):
     choice = int(choice)
     
     if choice == 1: # gaming
-        if budget > 1500:
-            return("High Level Gaming Recommendation")
-        if budget < 1500:
-            return("Low Level Gaming Recommendation")
+        if budget >= 5000:
+            return("High Level Gaming Recommendation") #make it above 3000
+
+        if budget > 2000 and budget < 5000:
+            return ("Mid Level Gaming Recommendation") #between 2 and 3k
+
+        if budget <=2000 and budget >= 1000:
+            return("Low Level Gaming Recommendation") #less than 2k
+
+        if budget < 1000:
+            print("prank")
+            
+
+        
     if choice == 2: # streaming 
-        if budget > 1500:
-            return("High Level Streaming Recommendation")
-        if budget < 1500:
-            return("Low Level Streaming Recommendation")
+        if budget >= 5000:
+            return("High Level Streaming Recommendation") #make it above 3000
+
+        if budget > 2000 and budget < 5000:
+            return ("Mid Level Streaming Recommendation") #between 2 and 3k
+
+        if budget <=2000 and budget >= 1000:
+            return("Low Level Streaming Recommendation") #less than 2k
+
+        if budget < 1000:
+            print("prank")
     if choice == 3: # office
         if budget > 1500:
             return("High Level Office Recommendation")
