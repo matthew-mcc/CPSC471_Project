@@ -267,7 +267,7 @@ def getRecommendedBuild(budget, choice):
             return("Low Level Gaming Recommendation") #less than 2k
 
         if budget < 1000:
-            print("prank")
+            return ('prank')
             
 
         
@@ -282,7 +282,7 @@ def getRecommendedBuild(budget, choice):
             return("Low Level Streaming Recommendation") #less than 2k
 
         if budget < 1000:
-            print("prank")
+            return ('prank')
     if choice == 3: # office
         if budget >= 3000:
             return("High Level Office Recommendation") #make it above 3000
@@ -294,7 +294,7 @@ def getRecommendedBuild(budget, choice):
             return("Low Level Office Recommendation") #less than 2k
 
         if budget < 1000:
-            print("prank")
+            return ('prank')
     else:
         print("Bad Choice") # debugging 
         
@@ -325,6 +325,8 @@ def renderRecommendedBuild(request):
 
     #get the build (make it in here)
     recBuildName = getRecBuildName()
+    if recBuildName == 'prank':
+        return redirect('https://www.amazon.ca/LeapFrog-LeapTop-Touch-English-Version/dp/B071GT4SZ5/ref=asc_df_B071GT4SZ5/?tag=googleshopc0c-20&linkCode=df0&hvadid=293000684325&hvpos=&hvnetw=g&hvrand=14770389823668040620&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9001335&hvtargid=pla-437162023438&psc=1')
     build = Build.objects.get(name=recBuildName)
     prices = {}
     sum = 0
