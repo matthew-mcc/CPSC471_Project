@@ -37,7 +37,7 @@ def get_gpu(request):
     gpu.build_gpu = model.get('model')
     if gpu.build_gpu is not None:
         gpu.save()
-    #return redirect('../build')
+    # return redirect('../build')
 
     return render(request, 'gpu.html', context)
 
@@ -84,6 +84,17 @@ def get_storage(request):
     if storage.build_storage1 is not None:
         storage.save()
     return render(request, 'storage.html', context)
+
+
+def get_storage2(request):
+    storage_list = Storage.objects.all()
+    context = {'storage_list': storage_list}
+    model = model = request.GET
+    storage = Build.objects.get(build_user=request.user.username)
+    storage.build_storage2 = model.get('model')
+    if storage.build_storage2 is not None:
+        storage.save()
+    return render(request, 'storage2.html', context)
 
 
 def get_case(request):
@@ -160,7 +171,7 @@ def showSignIn(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = authenticate(username = username, password = password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 print(request.user.username)
@@ -178,28 +189,32 @@ def showSignIn(request):
 def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
     prices = []
-    cpu = CPU.objects.get(model_name = build.build_cpu)
-    prices.insert(0,cpu.price)
-    gpu = GPU.objects.get(model_name = build.build_gpu)
-    prices.insert(1,gpu.price)
-    motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
-    prices.insert(2,motherboard.price)
-    psu = PowerSupply.objects.get(model_name = build.build_psu)
-    prices.insert(3,psu.price)
-    ram = Memory.objects.get(model_name = build.build_ram)
-    prices.insert(4,ram.price)
-    storage = Storage.objects.get(model_name = build.build_storage1)
-    prices.insert(5,storage.price)
-    case = Case.objects.get(model_name = build.build_case)
-    prices.insert(6,case.price)
-    liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
-    prices.insert(7,liquid.price)
-    air = AirCooling.objects.get(model_name = build.build_airCooling)
-    prices.insert(8,air.price)
 
-    print(len(prices))
-    
-    context = {'build': build, 'prices':prices}
+    if build.build_cpu is not '' and build.build_gpu is not '' and build.build_motherboard is not '' and build.build_psu is not '' and build.build_ram is not '' and build.build_storage and build.build_storage2 is not '' and build.build_case is not '' and build.build_liquidCooling is not '' and build.build_airCooling is not '':
+        cpu = CPU.objects.get(model_name=build.build_cpu)
+        prices.insert(0,cpu.price)
+        gpu = GPU.objects.get(model_name = build.build_gpu)
+        prices.insert(1,gpu.price)
+        motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
+        prices.insert(2,motherboard.price)
+        psu = PowerSupply.objects.get(model_name = build.build_psu)
+        prices.insert(3,psu.price)
+        ram = Memory.objects.get(model_name = build.build_ram)
+        prices.insert(4,ram.price)
+        storage = Storage.objects.get(model_name = build.build_storage1)
+        prices.insert(5,storage.price)
+        storage2 = Storage.objects.get(model_name = build.build_storage2)
+        prices.insert(6,storage2.price)
+        case = Case.objects.get(model_name = build.build_case)
+        prices.insert(7,case.price)
+        liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
+        prices.insert(8,liquid.price)
+        air = AirCooling.objects.get(model_name = build.build_airCooling)
+        prices.insert(9,air.price)
+
+        print(len(prices))
+
+    context = {'build': build, 'prices': prices}
     return render(request, 'build.html', context)
 
 
