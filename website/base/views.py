@@ -25,10 +25,13 @@ def get_cpu(request):
     return render(request, 'cpu.html', context)
 
 
+
 def get_gpu(request):
     gpu_list = GPU.objects.all()
 
     context = {'gpu_list': gpu_list}
+    #print(Build.objects.get(build_user=request.user.username))
+    print(Build.objects.get(build_user="matt"))
     return render(request, 'gpu.html', context)
 
 
@@ -89,15 +92,17 @@ def showSignUp(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(username, email,password)
-            # build = Build(build_id=0, name='', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
-            #               build_ram='',
-            #               build_storage1='',
-            #               build_storage2='',
-            #               build_case='',
-            #               build_liquidCooling='',
-            #               build_airCooling=''
-            #               )
-            # build.save()
+            #build = Build(build_user=request.user.username)
+            #build.save()
+            build = Build(build_user=username, name='test', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
+                          build_ram='',
+                          build_storage1='',
+                          build_storage2='',
+                          build_case='',
+                          build_liquidCooling='',
+                          build_airCooling=''
+                          )
+            build.save()
             return redirect('../signin')
     else:
         form = SignupForm()
