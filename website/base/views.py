@@ -232,14 +232,21 @@ def showBuildPage(request):
     return render(request, 'build.html', context)
 
 
+def getRecommendedBuild(budget, choice):
+    if budget > 1000:
+        pass
+
 def showRecommendedPage(request):
     submitbutton = request.POST.get("submit")
 
     if request.method == 'POST':
         form = RecommendForm(request.POST)
         if form.is_valid():
+
             budget = form.cleaned_data.get("budget")
             choice = form.cleaned_data.get("choice")
+            
+            return redirect('../build')
     else:
         form = RecommendForm()
     context = {'form': form, 'submitbutton': submitbutton}
