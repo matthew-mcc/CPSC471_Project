@@ -190,7 +190,7 @@ def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
     prices = []
 
-    if build.build_cpu is not '' and build.build_gpu is not '' and build.build_motherboard is not '' and build.build_psu is not '' and build.build_ram is not '' and build.build_storage and build.build_storage2 is not '' and build.build_case is not '' and build.build_liquidCooling is not '' and build.build_airCooling is not '':
+    if build.build_cpu != '' and build.build_gpu != '' and build.build_motherboard != '' and build.build_psu != '' and build.build_ram != '' and build.build_storage != '' and build.build_storage2 != '' and build.build_case != '' and build.build_liquidCooling != '' and build.build_airCooling != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
         prices.insert(0,cpu.price)
         gpu = GPU.objects.get(model_name = build.build_gpu)
