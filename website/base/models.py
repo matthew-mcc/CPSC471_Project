@@ -34,7 +34,7 @@ class CPU(models.Model):
     power_usage = models.IntegerField()
     graphics = models.CharField(max_length=100)
     chipset = models.CharField(max_length=50)
-    core_count = models.IntegerField()
+    thread_count = models.IntegerField()
     core_clock = models.CharField(max_length=20)
 
     def __str__(self):
