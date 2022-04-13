@@ -198,6 +198,9 @@ def showSignIn(request):
     context = {'form': form, 'submitbutton': submitbutton}
     return render(request, 'signin.html', context)
 
+def logoutView(request):
+    logout(request)
+    return redirect('home')
 
 def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)

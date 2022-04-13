@@ -49,6 +49,7 @@ urlpatterns = [
     path('airCooling/', views.get_airCool, name='airCooling'),
     path('recommendBuild/', views.renderRecommendedBuild, name='recommendBuild'),
     path('recovery/', views.showRecoveryPage, name ='recovery'),
+    path('logout/', views.logoutView, name = 'logout'),
     path('openapi', get_schema_view(
         title="MonkeBuilderAPI",
         description="API for PC builder site",
