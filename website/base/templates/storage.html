@@ -37,7 +37,7 @@
         style="background-color: black;">
         <div class="offcanvas-header">
             <h6 class="offcanvas-title" style="color: white;">Monke PC Builder</h6>
-            <img src="{% static 'Monkee.svg' %}" width="40%"/>
+            <img src="{% static 'Monkee.svg' %}" width="40%" />
             <button style="background-color:white" type="button" class="btn-close text-reset"
                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -72,7 +72,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -108,7 +109,11 @@
                         <tbody>
                             {% for sto in storage_list %}
                             <tr>
-                                <td>{{ sto.model_name}}</td>
+                                <form action="" method="get">
+                                <td><input name="model" id="model" value="{{sto.model_name}}" readonly
+                                        class="form-control-plaintext" type="text"
+                                        style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                </td>
                                 <td>{{ sto.price}}</td>
                                 <td>{{ sto.power_usage}}</td>
                                 <td>{{ sto.storage_size}}</td>
@@ -117,8 +122,9 @@
                                 <td>{{ sto.ssd}}</td>
                                 <td>{{ sto.hdd}}</td>
                                 <td>{{ sto.m2}}</td>
-                                
-                                <td><button>Select</button></td>
+
+                                <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
+                                </form>
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -72,7 +72,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -89,6 +90,7 @@
                 <h1 style="color: black;">CPUs <img src="{% static 'Monkee.svg' %}" width="5%" /></h1>
                 {% if latest_cpu_list %}
 
+                
                 <div style="padding-top: 5%; padding-left: 10%; padding-right: 10%;">
                     <table class="table table-dark">
                         <thead>
@@ -106,14 +108,19 @@
                         <tbody>
                             {% for cpu in latest_cpu_list %}
                             <tr>
-                                <td>{{ cpu.model_name}}</td>
-                                <td>{{ cpu.price}}</td>
-                                <td>{{ cpu.power_usage}}</td>
-                                <td>{{ cpu.graphics}}</td>
-                                <td>{{ cpu.chipset}}</td>
-                                <td>{{ cpu.core_count}}</td>
-                                <td>{{ cpu.core_clock}}</td>
-                                <td><button>Select</button></td>
+                                <form action="" method="get">
+                                    <td><input name="model" id="model" value="{{ cpu.model_name}}" readonly
+                                            class="form-control-plaintext" type="text"
+                                            style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
+                                    </td>
+                                    <td>{{ cpu.price}}</td>
+                                    <td>{{ cpu.power_usage}}</td>
+                                    <td>{{ cpu.graphics}}</td>
+                                    <td>{{ cpu.chipset}}</td>
+                                    <td>{{ cpu.core_count}}</td>
+                                    <td>{{ cpu.core_clock}}</td>
+                                    <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
+                                </form>
                             </tr>
                             {% endfor %}
                         </tbody>
