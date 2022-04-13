@@ -5,11 +5,7 @@ from django.db import models
 
 
 class Build(models.Model):
-<<<<<<< Updated upstream
-   # build_id = models.IntegerField(primary_key=True)
-=======
-    #build_id = models.IntegerField(primary_key=True)
->>>>>>> Stashed changes
+
     build_user = models.CharField(primary_key=True, max_length=50)
     name = models.CharField(max_length=50)
     total_price = models.IntegerField()

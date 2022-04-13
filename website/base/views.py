@@ -26,6 +26,8 @@ def get_cpu(request):
 
 
 
+
+
 def get_gpu(request):
     gpu_list = GPU.objects.all()
 
@@ -92,7 +94,6 @@ def showSignUp(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(username, email,password)
-<<<<<<< Updated upstream
             #build = Build(build_user=request.user.username)
             #build.save()
             build = Build(build_user=username, name='test', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
@@ -104,19 +105,6 @@ def showSignUp(request):
                           build_airCooling=''
                           )
             build.save()
-=======
-            if request.user.is_authenticated():
-                build = Build(build_user=request.user.username) 
-            # build = Build(build_id=0, name='', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
-            #               build_ram='',
-            #               build_storage1='',
-            #               build_storage2='',
-            #               build_case='',
-            #               build_liquidCooling='',
-            #               build_airCooling=''
-            #               )
-            # build.save()
->>>>>>> Stashed changes
             return redirect('../signin')
     else:
         form = SignupForm()
