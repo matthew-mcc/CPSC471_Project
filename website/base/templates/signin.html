@@ -42,16 +42,19 @@
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                     </a>
                 </li>
+                {%if user.is_authenticated %}
                 <li>
                     <a href="../build" class="nav-link text-truncate" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Custom Builder</span>
                     </a>
                 </li>
+                {%endif%}
                 <li>
                     <a href="../recommend" class="nav-link text-truncate" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Recommendation Center</span>
                     </a>
                 </li>
+                {%if user.is_authenticated%}
                 <li class="btn-group dropend">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Search Parts</span>
@@ -69,6 +72,7 @@
                         <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
                     </ul>
                 </li>
+                {%endif%}
             </ul>
         </div>
     </div>
