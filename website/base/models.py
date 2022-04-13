@@ -46,7 +46,7 @@ class GPU(models.Model):
     power_usage = models.IntegerField()
     architecture = models.CharField(max_length=50)
     chipset = models.CharField(max_length=50)
-    graphics = models.CharField(max_length=100)
+    vram = models.CharField(max_length=100)
     ports = models.CharField(max_length=50)
     bus_slots = models.CharField(max_length=50)
     core_count = models.IntegerField()
