@@ -196,25 +196,34 @@ def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
     prices = []
 
-    if build.build_cpu != '' and build.build_gpu != '' and build.build_motherboard != '' and build.build_psu != '' and build.build_ram != '' and build.build_storage != '' and build.build_storage2 != '' and build.build_case != '' and build.build_liquidCooling != '' and build.build_airCooling != '':
+    if build.build_cpu != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
         prices.insert(0,cpu.price)
+    if build.build_gpu != '':
         gpu = GPU.objects.get(model_name = build.build_gpu)
         prices.insert(1,gpu.price)
+    if build.build_motherboard != '':
         motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
         prices.insert(2,motherboard.price)
+    if build.build_psu != '':
         psu = PowerSupply.objects.get(model_name = build.build_psu)
         prices.insert(3,psu.price)
+    if  build.build_ram != '':
         ram = Memory.objects.get(model_name = build.build_ram)
         prices.insert(4,ram.price)
+    if  build.build_storage1 != '':
         storage = Storage.objects.get(model_name = build.build_storage1)
         prices.insert(5,storage.price)
+    if build.build_storage2 != '':
         storage2 = Storage.objects.get(model_name = build.build_storage2)
         prices.insert(6,storage2.price)
+    if build.build_case != '':
         case = Case.objects.get(model_name = build.build_case)
         prices.insert(7,case.price)
+    if build.build_liquidCooling != '':
         liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
         prices.insert(8,liquid.price)
+    if build.build_airCooling != '':
         air = AirCooling.objects.get(model_name = build.build_airCooling)
         prices.insert(9,air.price)
 
