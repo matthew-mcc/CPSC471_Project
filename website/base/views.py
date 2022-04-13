@@ -143,17 +143,20 @@ def showSignUp(request):
             username = form.cleaned_data.get("username")
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
-            user = User.objects.create_user(username, email,password)
-            build = Build(build_user=username, name=username+"'s Build", total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
-                          build_ram='',
-                          build_storage1='',
-                          build_storage2='',
-                          build_case='',
-                          build_liquidCooling='',
-                          build_airCooling=''
-                          )
-            build.save()
-            return redirect('../signin')
+            if User.objects.filter(username = username).exists():
+                return redirect('signup')
+            else:
+                user = User.objects.create_user(username, email,password)
+                build = Build(build_user=username, name=username+"'s Build", total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
+                            build_ram='',
+                            build_storage1='',
+                            build_storage2='',
+                            build_case='',
+                            build_liquidCooling='',
+                            build_airCooling=''
+                            )
+                build.save()
+                return redirect('../signin')
     else:
         form = SignupForm()
     context = {'form': form, 'submitbutton': submitbutton}
@@ -212,7 +215,6 @@ def showBuildPage(request):
         air = AirCooling.objects.get(model_name = build.build_airCooling)
         prices.insert(9,air.price)
 
-        print(len(prices))
 
     context = {'build': build, 'prices': prices}
     return render(request, 'build.html', context)
