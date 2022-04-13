@@ -284,10 +284,17 @@ def getRecommendedBuild(budget, choice):
         if budget < 1000:
             print("prank")
     if choice == 3: # office
-        if budget > 1500:
-            return("High Level Office Recommendation")
-        if budget < 1500:
-            return("Low Level Office Recommendation")
+        if budget >= 3000:
+            return("High Level Office Recommendation") #make it above 3000
+
+        if budget > 2000 and budget < 3000:
+            return ("Mid Level Office Recommendation") #between 2 and 3k
+
+        if budget <=2000 and budget >= 1000:
+            return("Low Level Office Recommendation") #less than 2k
+
+        if budget < 1000:
+            print("prank")
     else:
         print("Bad Choice") # debugging 
         
