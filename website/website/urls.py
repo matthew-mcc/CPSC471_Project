@@ -46,12 +46,12 @@ urlpatterns = [
     path('case/', views.get_case, name='case'),
     path('liquidCooling/', views.get_liquidCool, name='liquidCooling'),
     path('airCooling/', views.get_airCool, name='airCooling'),
-    path('openapi', get_schema_view(
-        title="MonkeBuilderAPI",
-        description="API for PC builder site",
-        version="1.0.0"
-    ), name='openapi-schema'),
-   
+
+    # path('openapi', get_schema_view(
+    #     title="MonkeBuilderAPI",
+    #     description="API for PC builder site",
+    #     version="1.0.0"
+    # ), name='openapi-schema'),
 
     # path('', views.home_view),
     # path('', TemplateView.as_view(template_name='home.html'), name="home"),
@@ -59,6 +59,21 @@ urlpatterns = [
    
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     
+]
+
+schema_view = get_schema_view(
+    title="MonkeBuilderAPI",
+    description="API for PC builder site",
+    version="1.0.0",
+    patterns = urlpatterns
+)
+
+apipattern = [
+    path('openapi', get_schema_view(
+        title="MonkeBuilderAPI",
+        description="API for PC builder site",
+        version="1.0.0"
+    ), name='openapi-schema'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
