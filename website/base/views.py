@@ -21,62 +21,101 @@ def get_cpu(request):
     latest_cpu_list = CPU.objects.all()
     context = {'latest_cpu_list': latest_cpu_list}
     model = request.GET
-    print(model.get('model'))
+    cpu = Build.objects.get(build_user=request.user.username)
+    cpu.build_cpu = model.get('model')
+    if cpu.build_cpu is not None:
+        cpu.save()
     return render(request, 'cpu.html', context)
-
-
-
 
 
 def get_gpu(request):
     gpu_list = GPU.objects.all()
 
     context = {'gpu_list': gpu_list}
-    #print(Build.objects.get(build_user=request.user.username))
-    print(Build.objects.get(build_user="matt"))
+    model = model = request.GET
+    gpu = Build.objects.get(build_user=request.user.username)
+    gpu.build_gpu = model.get('model')
+    if gpu.build_gpu is not None:
+        gpu.save()
+    #return redirect('../build')
+
     return render(request, 'gpu.html', context)
 
 
 def get_motherboard(request):
     motherboard_list = MotherBoard.objects.all()
     context = {'motherboard_list': motherboard_list}
+    model = model = request.GET
+    mobo = Build.objects.get(build_user=request.user.username)
+    mobo.build_motherboard = model.get('model')
+    if mobo.build_motherboard is not None:
+        mobo.save()
     return render(request, 'motherboard.html', context)
 
 
 def get_psu(request):
     psu_list = PowerSupply.objects.all()
     context = {'psu_list': psu_list}
+    model = model = request.GET
+    psu = Build.objects.get(build_user=request.user.username)
+    psu.build_psu = model.get('model')
+    if psu.build_psu is not None:
+        psu.save()
     return render(request, 'psu.html', context)
 
 
 def get_ram(request):
     ram_list = Memory.objects.all()
     context = {'ram_list': ram_list}
+    model = model = request.GET
+    ram = Build.objects.get(build_user=request.user.username)
+    ram.build_ram = model.get('model')
+    if ram.build_ram is not None:
+        ram.save()
     return render(request, 'memory.html', context)
 
 
 def get_storage(request):
     storage_list = Storage.objects.all()
     context = {'storage_list': storage_list}
+    model = model = request.GET
+    storage = Build.objects.get(build_user=request.user.username)
+    storage.build_storage1 = model.get('model')
+    if storage.build_storage1 is not None:
+        storage.save()
     return render(request, 'storage.html', context)
 
 
 def get_case(request):
     case_list = Case.objects.all()
     context = {'case_list': case_list}
+    model = model = request.GET
+    case = Build.objects.get(build_user=request.user.username)
+    case.build_case = model.get('model')
+    if case.build_case is not None:
+        case.save()
     return render(request, 'case.html', context)
 
 
 def get_airCool(request):
     ac_list = AirCooling.objects.all()
     context = {'ac_list': ac_list}
+    model = model = request.GET
+    air = Build.objects.get(build_user=request.user.username)
+    air.build_airCooling = model.get('model')
+    if air.build_airCooling is not None:
+        air.save()
     return render(request, 'airCooling.html', context)
 
 
 def get_liquidCool(request):
     lc_list = LiquidCooling.objects.all()
     context = {'lc_list': lc_list}
-
+    model = model = request.GET
+    liquid = Build.objects.get(build_user=request.user.username)
+    liquid.build_liquidCooling = model.get('model')
+    if liquid.build_liquidCooling is not None:
+        liquid.save()
     return render(request, 'liquidCooling.html', context)
 
 
@@ -94,8 +133,6 @@ def showSignUp(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             user = User.objects.create_user(username, email,password)
-            #build = Build(build_user=request.user.username)
-            #build.save()
             build = Build(build_user=username, name='test', total_price=0, build_cpu='', build_gpu='', build_motherboard='', build_psu='',
                           build_ram='',
                           build_storage1='',
@@ -139,7 +176,9 @@ def showSignIn(request):
 
 
 def showBuildPage(request):
-    return render(request, 'build.html')
+    build = Build.objects.get(build_user=request.user.username)
+    context = {'build': build}
+    return render(request, 'build.html', context)
 
 
 def showRecommendedPage(request):
