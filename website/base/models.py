@@ -99,12 +99,10 @@ class Storage(models.Model):
     price = models.IntegerField()
     power_usage= models.CharField(max_length=50)
     storage_size = models.CharField(max_length=50)
+    read_speed = models.CharField(max_length=50)
+    write_speed = models.CharField(max_length=50)
     form_factor =models.CharField(max_length=50)
-    ports = models.CharField(max_length=50)
-    ssd = models.CharField(max_length=50)
-    hdd = models.CharField(max_length=50)
-    m2 = models.CharField(max_length=50)
-
+    
     def __str__(self):
         return self.model_name
 
