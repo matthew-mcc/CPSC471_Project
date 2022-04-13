@@ -82,7 +82,7 @@
                     Monke Menu
                 </button>
                 <h1 style="color: black;">Custom PC Center <img src="{% static 'Monkee.svg' %}" width="5%" /> </h1>
-                <div style="padding-left: 20%; padding-right: 20%; padding-top: 2%;">
+                <div style="padding-left: 20%; padding-right: 20%; padding-top: 0%;">
                     <table class="table table-dark">
                         <thead>
                             <tr>
@@ -104,7 +104,9 @@
                                     {{build.build_cpu}}
                                 </td>
                                 <td>
-                                    {{prices.0}}
+                                    {% if prices %}
+                                    ${{ prices.cpu }}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -118,7 +120,9 @@
                                     {{build.build_gpu}}
                                 </td>
                                 <td>
-                                    {{prices.1}}
+                                    {% if prices %}
+                                    ${{prices.gpu}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -133,7 +137,9 @@
                                     {{build.build_motherboard}}
                                 </td>
                                 <td>
-                                    {{prices.2}}
+                                    {% if prices %}
+                                    ${{prices.mobo}}
+                                    {% endif %}
                                 </td>
 
                             </tr>
@@ -148,7 +154,9 @@
                                     {{build.build_psu}}
                                 </td>
                                 <td>
-                                    {{prices.3}}
+                                    {% if prices %}
+                                    ${{prices.psu}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -162,7 +170,9 @@
                                     {{build.build_ram}}
                                 </td>
                                 <td>
-                                    {{prices.4}}
+                                    {% if prices %}
+                                    ${{prices.ram}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -177,7 +187,9 @@
                                     {{build.build_storage1}}
                                 </td>
                                 <td>
-                                    {{prices.5}}
+                                    {% if prices %}
+                                    ${{prices.stor1}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -192,7 +204,9 @@
                                     {{build.build_storage2}}
                                 </td>
                                 <td>
-                                    {{prices.6}}
+                                    {% if prices %}
+                                    ${{prices.stor2}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -206,7 +220,9 @@
                                     {{build.build_case}}
                                 </td>
                                 <td>
-                                    {{prices.7}}
+                                    {% if prices %}
+                                    ${{prices.case}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -221,7 +237,9 @@
                                     {{build.build_liquidCooling}}
                                 </td>
                                 <td>
-                                    {{prices.8}}
+                                    {% if prices %}
+                                    ${{prices.lc}}
+                                    {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -236,7 +254,23 @@
                                     {{build.build_airCooling}}
                                 </td>
                                 <td>
-                                    {{prices.9}}
+                                    {% if prices %}
+                                    ${{prices.ac}}
+                                    {% endif %}
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Total Price
+                                </th>
+                                <td>                       
+                                </td>
+                                <td>                 
+                                </td>
+                                <td>
+                                    ${{sum}}
+                                    
                                 </td>
                             </tr>
                 </div>

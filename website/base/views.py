@@ -10,6 +10,11 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.template.defaulttags import register
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 
 def showHome(request):
@@ -159,6 +164,7 @@ def showSignUp(request):
                             build_airCooling=''
                             )
                 build.save()
+                messages.success(request,"Account Registered!")
                 return redirect('../signin')
     else:
         form = SignupForm()
@@ -170,7 +176,7 @@ def showSignIn(request):
     submitbutton = request.POST.get("submit")
     username = ''
     password = ''
-
+    msg = ''
     if request.method == 'POST':
         logout(request)
         form = LoginForm(request.POST)
@@ -180,7 +186,8 @@ def showSignIn(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                print(request.user.username)
+                msg += "Hello " + username + "!"
+                messages.success(request, msg)
                 return redirect('../')
             else:
                 messages.error(request, "This user does not exist")
@@ -194,41 +201,51 @@ def showSignIn(request):
 
 def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
-    prices = []
-
+    prices = {}
+    sum = 0
     if build.build_cpu != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
-        prices.insert(0,cpu.price)
+        prices['cpu'] = cpu.price
+        sum += cpu.price
     if build.build_gpu != '':
         gpu = GPU.objects.get(model_name = build.build_gpu)
-        prices.insert(1,gpu.price)
+        prices['gpu'] =gpu.price
+        sum += gpu.price
     if build.build_motherboard != '':
         motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
-        prices.insert(2,motherboard.price)
+        sum += motherboard.price
+        prices['mobo'] = motherboard.price
     if build.build_psu != '':
         psu = PowerSupply.objects.get(model_name = build.build_psu)
-        prices.insert(3,psu.price)
+        prices['psu'] = psu.price
+        sum += psu.price
     if  build.build_ram != '':
         ram = Memory.objects.get(model_name = build.build_ram)
-        prices.insert(4,ram.price)
+        prices['ram'] =ram.price
+        sum += ram.price
     if  build.build_storage1 != '':
         storage = Storage.objects.get(model_name = build.build_storage1)
-        prices.insert(5,storage.price)
+        prices['stor1'] =storage.price
+        sum += storage.price
     if build.build_storage2 != '':
         storage2 = Storage.objects.get(model_name = build.build_storage2)
-        prices.insert(6,storage2.price)
+        prices['stor2'] =storage2.price
+        sum += storage2.price
     if build.build_case != '':
         case = Case.objects.get(model_name = build.build_case)
-        prices.insert(7,case.price)
+        prices['case'] =case.price
+        sum += case.price
     if build.build_liquidCooling != '':
         liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
-        prices.insert(8,liquid.price)
+        prices['lc'] =liquid.price
+        sum += liquid.price
     if build.build_airCooling != '':
         air = AirCooling.objects.get(model_name = build.build_airCooling)
-        prices.insert(9,air.price)
+        prices['ac'] =air.price
+        sum += air.price
 
 
-    context = {'build': build, 'prices': prices}
+    context = {'build': build, 'prices': prices, 'sum':sum}
     return render(request, 'build.html', context)
 
 
@@ -282,39 +299,49 @@ def renderRecommendedBuild(request):
     #get the build (make it in here)
     recBuildName = getRecBuildName()
     build = Build.objects.get(name=recBuildName)
-    prices = []
-
+    prices = {}
+    sum = 0
     if build.build_cpu != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
-        prices.insert(0,cpu.price)
+        prices['cpu'] = cpu.price
+        sum += cpu.price
     if build.build_gpu != '':
         gpu = GPU.objects.get(model_name = build.build_gpu)
-        prices.insert(1,gpu.price)
+        prices['gpu'] =gpu.price
+        sum += gpu.price
     if build.build_motherboard != '':
         motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
-        prices.insert(2,motherboard.price)
+        sum += motherboard.price
+        prices['mobo'] = motherboard.price
     if build.build_psu != '':
         psu = PowerSupply.objects.get(model_name = build.build_psu)
-        prices.insert(3,psu.price)
+        prices['psu'] = psu.price
+        sum += psu.price
     if  build.build_ram != '':
         ram = Memory.objects.get(model_name = build.build_ram)
-        prices.insert(4,ram.price)
+        prices['ram'] =ram.price
+        sum += ram.price
     if  build.build_storage1 != '':
         storage = Storage.objects.get(model_name = build.build_storage1)
-        prices.insert(5,storage.price)
+        prices['stor1'] =storage.price
+        sum += storage.price
     if build.build_storage2 != '':
         storage2 = Storage.objects.get(model_name = build.build_storage2)
-        prices.insert(6,storage2.price)
+        prices['stor2'] =storage2.price
+        sum += storage2.price
     if build.build_case != '':
         case = Case.objects.get(model_name = build.build_case)
-        prices.insert(7,case.price)
+        prices['case'] =case.price
+        sum += case.price
     if build.build_liquidCooling != '':
         liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
-        prices.insert(8,liquid.price)
+        prices['lc'] =liquid.price
+        sum += liquid.price
     if build.build_airCooling != '':
         air = AirCooling.objects.get(model_name = build.build_airCooling)
-        prices.insert(9,air.price)
-    context = {'build':build, 'prices':prices}
+        prices['ac'] =air.price
+        sum += air.price
+    context = {'build':build, 'prices':prices, 'sum': sum}
     return render(request, 'recommendBuild.html', context)
 
 def showRecoveryPage(request):
