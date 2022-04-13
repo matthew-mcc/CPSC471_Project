@@ -42,9 +42,19 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+
+                        <!---Here needs to have user be updated on Login
+                            Something like if user = logged in: welcome username
+                                            else: please log in to get started
+                        -->
+                        
+                        <a class="navbar-brand">Welcome <strong>{{current_user}}!</strong></a>
+                        
+
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <div class="navbar-nav ms-auto">
                                 <div class="dropdown mt-2">
+                                    
                                     <button class="btn btn-lg btn-secondary dropdown toggle" type="button"
                                         id="parts-dropdown" data-bs-toggle="dropdown" style="background-color: black;">
                                         Search Parts
@@ -63,6 +73,9 @@
                                 </div>
                                 <a class="nav-link" href='signin'> <button type="button" class="btn btn-lg"
                                         style="color: white;"> Sign In</button></a>
+
+                                
+
                                 <a class="nav-link" href='signup'> <button type="button" class="btn btn-lg"
                                         style="color: white;"> Create Account</button></a>
                             </div>

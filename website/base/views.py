@@ -13,8 +13,11 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def showHome(request):
-
-    return render(request, 'home.html')
+    if request.user.username == None:
+        context = {'current_user':"guest"}
+    else:
+        context = {'current_user':request.user.username}
+    return render(request, 'home.html', context)
 
 
 def get_cpu(request):
