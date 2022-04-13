@@ -177,7 +177,29 @@ def showSignIn(request):
 
 def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
-    context = {'build': build}
+    prices = []
+    cpu = CPU.objects.get(model_name = build.build_cpu)
+    prices.insert(0,cpu.price)
+    gpu = GPU.objects.get(model_name = build.build_gpu)
+    prices.insert(1,gpu.price)
+    motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
+    prices.insert(2,motherboard.price)
+    psu = PowerSupply.objects.get(model_name = build.build_psu)
+    prices.insert(3,psu.price)
+    ram = Memory.objects.get(model_name = build.build_ram)
+    prices.insert(4,ram.price)
+    storage = Storage.objects.get(model_name = build.build_storage1)
+    prices.insert(5,storage.price)
+    case = Case.objects.get(model_name = build.build_case)
+    prices.insert(6,case.price)
+    liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
+    prices.insert(7,liquid.price)
+    air = AirCooling.objects.get(model_name = build.build_airCooling)
+    prices.insert(8,air.price)
+
+    print(len(prices))
+    
+    context = {'build': build, 'prices':prices}
     return render(request, 'build.html', context)
 
 
