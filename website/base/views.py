@@ -233,17 +233,20 @@ def showBuildPage(request):
 
 
 def getRecommendedBuild(budget, choice):
-    if choice == "Gaming":
+    budget = int(budget)
+    choice = int(choice)
+    
+    if choice == 1: # gaming
         if budget > 1500:
-            return("gaming_high")
+            return("High Level Gaming Recommendation")
         if budget < 1500:
-            return("gaming_low")
-    if choice == "Streaming":
+            return("Low Level Gaming Recommendation")
+    if choice == 2: # streaming 
         if budget > 1500:
             pass # reccomend high end
         if budget < 1500:
             pass # reccomend low end
-    if choice == "Office":
+    if choice == 3: # office
         if budget > 1500:
             pass # reccomend high end
         if budget < 1500:
@@ -261,7 +264,13 @@ def showRecommendedPage(request):
 
             budget = form.cleaned_data.get("budget")
             choice = form.cleaned_data.get("choice")
+            
             build_name = getRecommendedBuild(budget, choice)
+            
+            global getRecBuildName
+            def getRecBuildName():
+                return build_name
+
             return redirect('../recommendBuild')
     else:
         form = RecommendForm()
@@ -271,7 +280,42 @@ def showRecommendedPage(request):
 def renderRecommendedBuild(request):
 
     #get the build (make it in here)
-    return render(request, 'recommendBuild.html')
+    recBuildName = getRecBuildName()
+    build = Build.objects.get(name=recBuildName)
+    prices = []
+
+    if build.build_cpu != '':
+        cpu = CPU.objects.get(model_name=build.build_cpu)
+        prices.insert(0,cpu.price)
+    if build.build_gpu != '':
+        gpu = GPU.objects.get(model_name = build.build_gpu)
+        prices.insert(1,gpu.price)
+    if build.build_motherboard != '':
+        motherboard = MotherBoard.objects.get(model_name = build.build_motherboard)
+        prices.insert(2,motherboard.price)
+    if build.build_psu != '':
+        psu = PowerSupply.objects.get(model_name = build.build_psu)
+        prices.insert(3,psu.price)
+    if  build.build_ram != '':
+        ram = Memory.objects.get(model_name = build.build_ram)
+        prices.insert(4,ram.price)
+    if  build.build_storage1 != '':
+        storage = Storage.objects.get(model_name = build.build_storage1)
+        prices.insert(5,storage.price)
+    if build.build_storage2 != '':
+        storage2 = Storage.objects.get(model_name = build.build_storage2)
+        prices.insert(6,storage2.price)
+    if build.build_case != '':
+        case = Case.objects.get(model_name = build.build_case)
+        prices.insert(7,case.price)
+    if build.build_liquidCooling != '':
+        liquid = LiquidCooling.objects.get(model_name = build.build_liquidCooling)
+        prices.insert(8,liquid.price)
+    if build.build_airCooling != '':
+        air = AirCooling.objects.get(model_name = build.build_airCooling)
+        prices.insert(9,air.price)
+    context = {'build':build, 'prices':prices}
+    return render(request, 'recommendBuild.html', context)
 
 def showRecoveryPage(request):
     submitbutton = request.POST.get("submit")
