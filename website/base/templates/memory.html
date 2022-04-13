@@ -107,6 +107,7 @@
                         <tbody>
                             {% for ram in ram_list %}
                             <tr>
+                                <form action="" method="get">
                                 <td><input name="model" id="model" value="{{ram.model_name}}" readonly
                                         class="form-control-plaintext" type="text"
                                         style="background-color: rgb(33,37,41); border-color: rgb(33,37,41); color: white;">
@@ -118,6 +119,7 @@
                                 <td>{{ ram.type}}</td>
                                 <td>{{ ram.no_sticks}}</td>
                                 <td> <button type="submit" class="btn btn-dark btn-mds"> Submit</button></td>
+                                </form>
                             </tr>
                             {% endfor %}
                         </tbody>
