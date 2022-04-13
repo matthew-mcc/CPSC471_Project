@@ -100,7 +100,7 @@
                                     {{build.build_cpu}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.cpu %}
                                     ${{ prices.cpu }}
                                     {% endif %}
                                 </td>
@@ -113,7 +113,7 @@
                                     {{build.build_gpu}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.gpu %}
                                     ${{prices.gpu}}
                                     {% endif %}
                                 </td>
@@ -126,7 +126,7 @@
                                     {{build.build_motherboard}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.mobo %}
                                     ${{prices.mobo}}
                                     {% endif %}
                                 </td>
@@ -140,7 +140,7 @@
                                     {{build.build_psu}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.psu %}
                                     ${{prices.psu}}
                                     {% endif %}
                                 </td>
@@ -153,7 +153,7 @@
                                     {{build.build_ram}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.ram %}
                                     ${{prices.ram}}
                                     {% endif %}
                                 </td>
@@ -167,7 +167,7 @@
                                     {{build.build_storage1}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.stor1 %}
                                     ${{prices.stor1}}
                                     {% endif %}
                                 </td>
@@ -180,7 +180,7 @@
                                     {{build.build_storage2}}
                                 </td>
                                 <td>
-                                    {% if prices %}
+                                    {% if prices.stor2 %}
                                     ${{prices.stor2}}
                                     {% endif %}
                                 </td>
