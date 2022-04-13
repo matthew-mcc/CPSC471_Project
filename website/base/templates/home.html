@@ -47,9 +47,11 @@
                             Something like if user = logged in: welcome username
                                             else: please log in to get started
                         -->
-                        
+                        {% if current_user %}
                         <a class="navbar-brand">Welcome <strong>{{current_user}}!</strong></a>
-                        
+                        {% else %}
+                        <a class="navbar-brand">Welcome <strong>guest!</strong></a>
+                        {% endif %}
 
                         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
                             <div class="navbar-nav ms-auto">

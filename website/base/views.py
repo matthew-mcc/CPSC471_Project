@@ -14,7 +14,7 @@ from django.contrib.auth import authenticate, login, logout
 
 def showHome(request):
     if request.user.username == None:
-        context = {'current_user':"guest"}
+        context = {'current_user':'guest'}
     else:
         context = {'current_user':request.user.username}
     return render(request, 'home.html', context)
@@ -233,8 +233,24 @@ def showBuildPage(request):
 
 
 def getRecommendedBuild(budget, choice):
-    if budget > 1000:
-        pass
+    if choice == "Gaming":
+        if budget > 1500:
+            return("gaming_high")
+        if budget < 1500:
+            return("gaming_low")
+    if choice == "Streaming":
+        if budget > 1500:
+            pass # reccomend high end
+        if budget < 1500:
+            pass # reccomend low end
+    if choice == "Office":
+        if budget > 1500:
+            pass # reccomend high end
+        if budget < 1500:
+            pass # reccomend low end
+    else:
+        print("Bad Choice") # debugging 
+        
 
 def showRecommendedPage(request):
     submitbutton = request.POST.get("submit")
@@ -245,13 +261,17 @@ def showRecommendedPage(request):
 
             budget = form.cleaned_data.get("budget")
             choice = form.cleaned_data.get("choice")
-            
-            return redirect('../build')
+            build_name = getRecommendedBuild(budget, choice)
+            return redirect('../recommendBuild')
     else:
         form = RecommendForm()
     context = {'form': form, 'submitbutton': submitbutton}
     return render(request, 'recommend.html', context)
 
+def renderRecommendedBuild(request):
+
+    #get the build (make it in here)
+    return render(request, 'recommendBuild.html')
 
 def showRecoveryPage(request):
     submitbutton = request.POST.get("submit")
