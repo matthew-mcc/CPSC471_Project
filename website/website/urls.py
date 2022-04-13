@@ -47,30 +47,13 @@ urlpatterns = [
     path('liquidCooling/', views.get_liquidCool, name='liquidCooling'),
     path('airCooling/', views.get_airCool, name='airCooling'),
     path('recovery/', views.showRecoveryPage, name ='recovery'),
-    
+
     path('openapi', get_schema_view(
         title="MonkeBuilderAPI",
         description="API for PC builder site",
         version="1.0.0"
-    ), name='openapi-schema'),
-   
-]
-
-schema_view = get_schema_view(
-    title="MonkeBuilderAPI",
-    description="API for PC builder site",
-    version="1.0.0",
-    patterns = urlpatterns
-)
-
-apipattern = [
-    path('openapi', get_schema_view(
-        title="MonkeBuilderAPI",
-        description="API for PC builder site",
-        version="1.0.0"
-    ), name='openapi-schema'),
+    )),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
-
 
