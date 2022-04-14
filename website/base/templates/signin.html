@@ -39,6 +39,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             {% endif %}
+            {%if 'error' in message.tags%}
+            <div id="messages" class="alert alert-danger alert-dismissible mx-auto" role="alert"
+            style="position: relative; margin-top:10px; width: 90%;">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
             {% endfor %}
         </ul>
         {% endif %}

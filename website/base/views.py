@@ -190,7 +190,7 @@ def showSignIn(request):
                 messages.success(request, msg)
                 return redirect('../')
             else:
-                messages.error(request, "This user does not exist")
+                messages.error(request, "Invalid Username and Password Combo!")
                 redirect('signin')
 
     else:
