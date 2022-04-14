@@ -27,6 +27,22 @@
 </head>
 
 <body style="background-color: rgb(76, 99, 99);">
+
+    <div class="mx-auto" style="position: fixed; width: 100%; padding-left: 30%; padding-right: 30%;">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            {%if 'success' in message.tags%}
+            <div id="messages" class="alert alert-primary alert-dismissible mx-auto" role="alert"
+                style="position: relative; margin-top:10px; width: 90%;">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
     <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false"
         style="background-color: black;">
         <div class="offcanvas-header">
@@ -69,7 +85,8 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
                 {%endif%}
