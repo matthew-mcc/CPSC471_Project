@@ -206,6 +206,49 @@ def showBuildPage(request):
     build = Build.objects.get(build_user=request.user.username)
     prices = {}
     sum = 0
+    model = request.GET
+    build = Build.objects.get(build_user=request.user.username)
+    if CPU.objects.filter(model_name=model.get('model')).exists():
+        build.build_cpu = model.get('model')
+        if build.build_cpu is not None:
+            build.save()
+    elif GPU.objects.filter(model_name=model.get('model')).exists():
+        build.build_gpu = model.get('model')
+        if build.build_gpu is not None:
+            build.save()
+    elif MotherBoard.objects.filter(model_name=model.get('model')).exists():
+        build.build_motherboard = model.get('model')
+        if build.build_motherboard is not None:
+            build.save()
+    elif PowerSupply.objects.filter(model_name=model.get('model')).exists():
+        build.build_psu = model.get('model')
+        if build.build_psu is not None:
+            build.save()
+    elif Memory.objects.filter(model_name=model.get('model')).exists():
+        build.build_ram = model.get('model')
+        if build.build_ram is not None:
+            build.save()
+    elif Storage.objects.filter(model_name=model.get('model')).exists():
+        build.build_storage1= model.get('model')
+        if build.build_storage1 is not None:
+            build.save()            
+    elif Storage.objects.filter(model_name=model.get('model')).exists():
+        build.build_storage2 = model.get('model')
+        if build.build_storage2 is not None:
+            build.save()
+    elif Case.objects.filter(model_name=model.get('model')).exists():
+        build.build_case = model.get('model')
+        if build.build_case is not None:
+            build.save()
+    elif LiquidCooling.objects.filter(model_name=model.get('model')).exists():
+        build.build_liquidCooling = model.get('model')
+        if build.build_liquidCooling is not None:
+            build.save()
+    elif AirCooling.objects.filter(model_name=model.get('model')).exists():
+        build.build_airCooling = model.get('model')
+        if build.build_airCooling is not None:
+            build.save()     
+
     if build.build_cpu != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
         prices['cpu'] = cpu.price
