@@ -262,26 +262,27 @@ def showBuildPage(request):
         prices['ac'] =air.price
         sum += air.price
 
-    cpuCheck = cpu = CPU.objects.get(model_name=build.build_cpu)
-    motherboardCheck = MotherBoard.objects.get(model_name = build.build_motherboard)
-    ramCheck = Memory.objects.get(model_name = build.build_ram)
-    caseCheck = Case.objects.get(model_name = build.build_case)
+    if build.build_cpu != '' and build.build_motherboard != '' and build.build_ram != '' and build.build_case != '':
+        cpuCheck = cpu = CPU.objects.get(model_name=build.build_cpu)
+        motherboardCheck = MotherBoard.objects.get(model_name = build.build_motherboard)
+        ramCheck = Memory.objects.get(model_name = build.build_ram)
+        caseCheck = Case.objects.get(model_name = build.build_case)
 
-    if chipsetIntel in cpuCheck.chipset and chipsetAMD in motherboardCheck.chipset:
-        compatible = False
-        messages.error(request, "CPU and Motherboard are not compatible!")
-    if "Ryzen" in cpuCheck.chipset and chipsetIntel in motherboardCheck.chipset:
-        compatible = False
-        messages.error(request, "CPU and Motherboard are not compatible!")
-    if motherboardCheck.memory_type != ramCheck.type:
-        compatible = False
-        messages.error(request, "RAM and Motherboard are not compatible!")
-    if motherboardCheck.form_factor == "ATX" and caseCheck.form_factor == "Micro ATX" or motherboardCheck.form_factor == "E-ATX" and caseCheck.form_factor == "Micro ATX":
-        compatible = False
-        messages.error(request, "Case and Motherboard are not compatible!")
-    if motherboardCheck.form_factor =="E-ATX" and caseCheck.form_factor == "ATX":
-        compatible = False
-        messages.error(request, "Case and Motherboard are not compatible!")
+        if chipsetIntel in cpuCheck.chipset and chipsetAMD in motherboardCheck.chipset:
+            compatible = False
+            messages.error(request, "CPU and Motherboard are not compatible!")
+        if "Ryzen" in cpuCheck.chipset and chipsetIntel in motherboardCheck.chipset:
+            compatible = False
+            messages.error(request, "CPU and Motherboard are not compatible!")
+        if motherboardCheck.memory_type != ramCheck.type:
+            compatible = False
+            messages.error(request, "RAM and Motherboard are not compatible!")
+        if motherboardCheck.form_factor == "ATX" and caseCheck.form_factor == "Micro ATX" or motherboardCheck.form_factor == "E-ATX" and caseCheck.form_factor == "Micro ATX":
+            compatible = False
+            messages.error(request, "Case and Motherboard are not compatible!")
+        if motherboardCheck.form_factor =="E-ATX" and caseCheck.form_factor == "ATX":
+            compatible = False
+            messages.error(request, "Case and Motherboard are not compatible!")
 
 
     if request.method == 'POST':
@@ -289,7 +290,7 @@ def showBuildPage(request):
         email = user.email
         subject += user.username
         subject +="'s Custom Build!"
-        message += "CPU: " + build.build_cpu + "GPU: " + build.build_gpu + '\n' + "Motherboard: " + build.build_motherboard+ '\n' + "Power Supply: " + build.build_psu + '\n'+ "Ram: " + build.build_psu + '\n'+ "Storage 1: " + build.build_storage1 + '\n' + "Storage 2: " + build.build_storage2 + '\n' + "Case: " + build.build_case + '\n' + "Liquid Cooling: " + build.build_liquidCooling+ '\n' + build.build_airCooling + '\n' + "Total Price: " + "$"+str(sum)
+        message += "CPU: " + build.build_cpu + '\n'+ "GPU: "  + build.build_gpu + '\n' + "Motherboard: " + build.build_motherboard+ '\n' + "Power Supply: " + build.build_psu + '\n'+ "Ram: " + build.build_psu + '\n'+ "Storage 1: " + build.build_storage1 + '\n' + "Storage 2: " + build.build_storage2 + '\n' + "Case: " + build.build_case + '\n' + "Liquid Cooling: " + build.build_liquidCooling+ '\n' + build.build_airCooling + '\n' + "Total Price: " + "$"+str(sum)
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [email]
         send_mail(subject=subject, message=message,

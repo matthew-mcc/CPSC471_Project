@@ -16,3 +16,7 @@ class RecommendForm(forms.Form):
 
 class RecoveryForm(forms.Form):
     email = forms.CharField(widget = forms.EmailInput(attrs={'class': 'form-control', 'placeholder' : 'Email', 'id' : 'floatingInput'}))
+
+class ChangePassword(forms.Form):
+    password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':  'Password', 'id' : 'floatingPassword'}))
+    password = forms.CharField(widget = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':  'Password', 'id' : 'floatingPassword'}))
