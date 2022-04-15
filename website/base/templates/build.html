@@ -67,12 +67,29 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+
+        {%if 'error' in message.tags%}
+        <div id="messages" class="alert alert-danger alert-dismissible mx-auto" role="alert"
+        style="position: relative; margin-top:10px; width: 90%;">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
 
     <div class="container-fluid">
         <div class="row">
@@ -82,12 +99,25 @@
                     Monke Menu
                 </button>
                 <h1 style="color: black;">Custom PC Center <img src="{% static 'Monkee.svg' %}" width="5%" /> </h1>
-                <div style="padding-left: 20%; padding-right: 20%; padding-top: 0%;">
+                <div style="padding-left: 20%; padding-right: 20%; padding-top: 0%; padding-bottom: 10%;">
                     <table class="table table-dark">
                         <thead>
                             <tr>
                                 <th scope="col">Parts</th>
-                                <th scope="col"></th>
+                                {%if comp%}
+                                <th scope="col">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-light btn-md" id='submit' name='submit'>Email
+                                            Build</button>
+                                    </form>
+
+                                </th>
+                                {%else%}
+                                <th>
+
+                                </th>
+                                {%endif%}
                                 <th scope="col">Model Name</th>
                                 <th scope="col">Price</th>
                             </tr>
@@ -197,7 +227,7 @@
                                     Storage 2
                                 </th>
                                 <td>
-                                    <a href="../storage"><button class="btn btn-light btn-lg">Choose Storage
+                                    <a href="../storage2"><button class="btn btn-light btn-lg">Choose Storage
                                             2</button></a>
                                 </td>
                                 <td>
@@ -257,20 +287,37 @@
                                     {% if prices.ac %}
                                     ${{prices.ac}}
                                     {% endif %}
-                                    
+
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
                                     Total Price
                                 </th>
-                                <td>                       
+                                <td>
                                 </td>
-                                <td>                 
+                                <td>
                                 </td>
                                 <td>
                                     ${{sum}}
-                                    
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    Compatible?
+                                </th>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                    {%if comp%}
+                                    Yes
+                                    {%else%}
+                                    No
+                                    {%endif%}
+
                                 </td>
                             </tr>
                 </div>

@@ -26,6 +26,7 @@ def showHome(request):
 
 
 def get_cpu(request):
+    # submitbutton = request.POST.get("submit")
     latest_cpu_list = CPU.objects.all()
     context = {'latest_cpu_list': latest_cpu_list}
     model = request.GET
@@ -33,7 +34,8 @@ def get_cpu(request):
     cpu.build_cpu = model.get('model')
     if cpu.build_cpu is not None:
         cpu.save()
-    return render(request, 'cpu.html', context)
+        return redirect('../build')
+    return render(request, 'cpu.html', context, )
 
 
 def get_gpu(request):
@@ -45,8 +47,7 @@ def get_gpu(request):
     gpu.build_gpu = model.get('model')
     if gpu.build_gpu is not None:
         gpu.save()
-    # return redirect('../build')
-
+        return redirect('../build')
     return render(request, 'gpu.html', context)
 
 
@@ -58,6 +59,7 @@ def get_motherboard(request):
     mobo.build_motherboard = model.get('model')
     if mobo.build_motherboard is not None:
         mobo.save()
+        return redirect('../build')
     return render(request, 'motherboard.html', context)
 
 
@@ -69,6 +71,7 @@ def get_psu(request):
     psu.build_psu = model.get('model')
     if psu.build_psu is not None:
         psu.save()
+        return redirect('../build')
     return render(request, 'psu.html', context)
 
 
@@ -80,6 +83,7 @@ def get_ram(request):
     ram.build_ram = model.get('model')
     if ram.build_ram is not None:
         ram.save()
+        return redirect('../build')
     return render(request, 'memory.html', context)
 
 
@@ -91,6 +95,7 @@ def get_storage(request):
     storage.build_storage1 = model.get('model')
     if storage.build_storage1 is not None:
         storage.save()
+        return redirect('../build')
     return render(request, 'storage.html', context)
 
 
@@ -102,6 +107,7 @@ def get_storage2(request):
     storage.build_storage2 = model.get('model')
     if storage.build_storage2 is not None:
         storage.save()
+        return redirect('../build')
     return render(request, 'storage2.html', context)
 
 
@@ -113,6 +119,7 @@ def get_case(request):
     case.build_case = model.get('model')
     if case.build_case is not None:
         case.save()
+        return redirect('../build')
     return render(request, 'case.html', context)
 
 
@@ -124,6 +131,7 @@ def get_airCool(request):
     air.build_airCooling = model.get('model')
     if air.build_airCooling is not None:
         air.save()
+        return redirect('../build')
     return render(request, 'airCooling.html', context)
 
 
@@ -135,6 +143,7 @@ def get_liquidCool(request):
     liquid.build_liquidCooling = model.get('model')
     if liquid.build_liquidCooling is not None:
         liquid.save()
+        return redirect('../build')
     return render(request, 'liquidCooling.html', context)
 
 
@@ -203,52 +212,15 @@ def logoutView(request):
     return redirect('home')
 
 def showBuildPage(request):
+    compatible = True
+    chipsetIntel = "Intel"
+    chipsetAMD = "AMD"
+    submitbutton = request.POST.get("submit")
     build = Build.objects.get(build_user=request.user.username)
     prices = {}
     sum = 0
-    model = request.GET
-    build = Build.objects.get(build_user=request.user.username)
-    if CPU.objects.filter(model_name=model.get('model')).exists():
-        build.build_cpu = model.get('model')
-        if build.build_cpu is not None:
-            build.save()
-    elif GPU.objects.filter(model_name=model.get('model')).exists():
-        build.build_gpu = model.get('model')
-        if build.build_gpu is not None:
-            build.save()
-    elif MotherBoard.objects.filter(model_name=model.get('model')).exists():
-        build.build_motherboard = model.get('model')
-        if build.build_motherboard is not None:
-            build.save()
-    elif PowerSupply.objects.filter(model_name=model.get('model')).exists():
-        build.build_psu = model.get('model')
-        if build.build_psu is not None:
-            build.save()
-    elif Memory.objects.filter(model_name=model.get('model')).exists():
-        build.build_ram = model.get('model')
-        if build.build_ram is not None:
-            build.save()
-    elif Storage.objects.filter(model_name=model.get('model')).exists():
-        build.build_storage1= model.get('model')
-        if build.build_storage1 is not None:
-            build.save()            
-    elif Storage.objects.filter(model_name=model.get('model')).exists():
-        build.build_storage2 = model.get('model')
-        if build.build_storage2 is not None:
-            build.save()
-    elif Case.objects.filter(model_name=model.get('model')).exists():
-        build.build_case = model.get('model')
-        if build.build_case is not None:
-            build.save()
-    elif LiquidCooling.objects.filter(model_name=model.get('model')).exists():
-        build.build_liquidCooling = model.get('model')
-        if build.build_liquidCooling is not None:
-            build.save()
-    elif AirCooling.objects.filter(model_name=model.get('model')).exists():
-        build.build_airCooling = model.get('model')
-        if build.build_airCooling is not None:
-            build.save()     
-
+    message = ''
+    subject = ''
     if build.build_cpu != '':
         cpu = CPU.objects.get(model_name=build.build_cpu)
         prices['cpu'] = cpu.price
@@ -290,8 +262,43 @@ def showBuildPage(request):
         prices['ac'] =air.price
         sum += air.price
 
+    cpuCheck = cpu = CPU.objects.get(model_name=build.build_cpu)
+    motherboardCheck = MotherBoard.objects.get(model_name = build.build_motherboard)
+    ramCheck = Memory.objects.get(model_name = build.build_ram)
+    caseCheck = Case.objects.get(model_name = build.build_case)
 
-    context = {'build': build, 'prices': prices, 'sum':sum}
+    if chipsetIntel in cpuCheck.chipset and chipsetAMD in motherboardCheck.chipset:
+        compatible = False
+        messages.error(request, "CPU and Motherboard are not compatible!")
+    if "Ryzen" in cpuCheck.chipset and chipsetIntel in motherboardCheck.chipset:
+        compatible = False
+        messages.error(request, "CPU and Motherboard are not compatible!")
+    if motherboardCheck.memory_type != ramCheck.type:
+        compatible = False
+        messages.error(request, "RAM and Motherboard are not compatible!")
+    if motherboardCheck.form_factor == "ATX" and caseCheck.form_factor == "Micro ATX" or motherboardCheck.form_factor == "E-ATX" and caseCheck.form_factor == "Micro ATX":
+        compatible = False
+        messages.error(request, "Case and Motherboard are not compatible!")
+    if motherboardCheck.form_factor =="E-ATX" and caseCheck.form_factor == "ATX":
+        compatible = False
+        messages.error(request, "Case and Motherboard are not compatible!")
+
+
+    if request.method == 'POST':
+        user = User.objects.get(username=request.user.username)
+        email = user.email
+        subject += user.username
+        subject +="'s Custom Build!"
+        message += "CPU: " + build.build_cpu + "GPU: " + build.build_gpu + '\n' + "Motherboard: " + build.build_motherboard+ '\n' + "Power Supply: " + build.build_psu + '\n'+ "Ram: " + build.build_psu + '\n'+ "Storage 1: " + build.build_storage1 + '\n' + "Storage 2: " + build.build_storage2 + '\n' + "Case: " + build.build_case + '\n' + "Liquid Cooling: " + build.build_liquidCooling+ '\n' + build.build_airCooling + '\n' + "Total Price: " + "$"+str(sum)
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        send_mail(subject=subject, message=message,
+                from_email=email_from, recipient_list=recipient_list)
+        messages.success(request, "Email Sent!")
+        return redirect('../')
+
+    
+    context = {'build': build, 'prices': prices, 'sum':sum, 'submitbutton': submitbutton, 'comp':compatible}
     return render(request, 'build.html', context)
 
 
@@ -368,6 +375,8 @@ def renderRecommendedBuild(request):
 
     #get the build (make it in here)
     recBuildName = getRecBuildName()
+    message = ''
+    subject = ''
     if recBuildName == 'prank':
         return redirect('https://www.amazon.ca/LeapFrog-LeapTop-Touch-English-Version/dp/B071GT4SZ5/ref=asc_df_B071GT4SZ5/?tag=googleshopc0c-20&linkCode=df0&hvadid=293000684325&hvpos=&hvnetw=g&hvrand=14770389823668040620&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9001335&hvtargid=pla-437162023438&psc=1')
     build = Build.objects.get(name=recBuildName)
@@ -413,6 +422,19 @@ def renderRecommendedBuild(request):
         air = AirCooling.objects.get(model_name = build.build_airCooling)
         prices['ac'] =air.price
         sum += air.price
+
+    if request.method == 'POST':
+        user = User.objects.get(username=request.user.username)
+        email = user.email
+        subject += recBuildName
+        subject +=" for "+ user.username
+        message += "CPU: " + build.build_cpu + "GPU: " + build.build_gpu + '\n' + "Motherboard: " + build.build_motherboard+ '\n' + "Power Supply: " + build.build_psu + '\n'+ "Ram: " + build.build_psu + '\n'+ "Storage 1: " + build.build_storage1 + '\n' + "Storage 2: " + build.build_storage2 + '\n' + "Case: " + build.build_case + '\n' + "Liquid Cooling: " + build.build_liquidCooling+ '\n' + build.build_airCooling + '\n' + "Total Price: " + "$"+str(sum)
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        send_mail(subject=subject, message=message,
+                from_email=email_from, recipient_list=recipient_list)
+        messages.success(request, "Email Sent!")
+        return redirect('../')
     context = {'build':build, 'prices':prices, 'sum': sum}
     return render(request, 'recommendBuild.html', context)
 
@@ -434,6 +456,7 @@ def showRecoveryPage(request):
                 recipient_list = [email]
                 send_mail(subject=subject, message=message,
                           from_email=email_from, recipient_list=recipient_list)
+                messages.success(request, "Email Sent!")
                 return redirect('../')
             except User.DoesNotExist:
                 messages.error(request, "This is email is not registered!")

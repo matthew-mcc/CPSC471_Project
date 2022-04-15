@@ -42,16 +42,19 @@
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
                     </a>
                 </li>
+                {%if user.is_authenticated %}
                 <li>
                     <a href="../build" class="nav-link text-truncate" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Custom Builder</span>
                     </a>
                 </li>
+                {%endif%}
                 <li>
                     <a href="../recommend" class="nav-link text-truncate" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Recommendation Center</span>
                     </a>
                 </li>
+                {%if user.is_authenticated%}
                 <li class="btn-group dropend">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: white;">
                         <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline">Search Parts</span>
@@ -66,11 +69,30 @@
                         <li><a href="../storage" class="dropdown-item" style="color: white;">Storage</a></li>
                         <li><a href="../case" class="dropdown-item" style="color: white;">Cases</a></li>
                         <li><a href="../airCooling" class="dropdown-item" style="color: white;">Air Cooling</a></li>
-                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a></li>
+                        <li><a href="../liquidCooling" class="dropdown-item" style="color: white;">Liquid Cooling</a>
+                        </li>
                     </ul>
                 </li>
+                {%endif%}
             </ul>
         </div>
+    </div>
+
+
+    <div class="mx-auto" style="position: fixed; width: 100%; padding-left: 30%; padding-right: 30%;">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            {%if 'error' in message.tags%}
+            <div id="messages" class="alert alert-danger alert-dismissible mx-auto" role="alert"
+                style="position: relative; margin-top:10px; width: 90%;">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
 
     <div class="container-fluid">

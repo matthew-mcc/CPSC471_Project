@@ -87,6 +87,16 @@
                         <thead>
                             <tr>
                                 <th scope="col">Parts</th>
+                                {%if user.is_authenticated %}
+                                <th scope="col">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <button class="btn btn-light btn-md" id='submit'
+                                            name='submit'>Email Build</button>
+                                    </form>
+
+                                </th>
+                                {%endif%}
                                 <th scope="col">Model Name</th>
                                 <th scope="col">Price</th>
                             </tr>
@@ -96,6 +106,10 @@
                                 <th scope="row">
                                     CPU
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_cpu}}
                                 </td>
@@ -109,6 +123,10 @@
                                 <th scope="row">
                                     GPU
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_gpu}}
                                 </td>
@@ -122,6 +140,10 @@
                                 <th scope="row">
                                     Motherboard
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_motherboard}}
                                 </td>
@@ -136,6 +158,10 @@
                                 <th scope="row">
                                     Power Supply
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_psu}}
                                 </td>
@@ -149,6 +175,10 @@
                                 <th scope="row">
                                     RAM
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_ram}}
                                 </td>
@@ -162,7 +192,10 @@
                                 <th scope="row">
                                     Storage 1
                                 </th>
-
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_storage1}}
                                 </td>
@@ -176,6 +209,10 @@
                                 <th scope="row">
                                     Storage 2
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_storage2}}
                                 </td>
@@ -189,6 +226,10 @@
                                 <th scope="row">
                                     Case
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_case}}
                                 </td>
@@ -202,6 +243,10 @@
                                 <th scope="row">
                                     Liquid Cooling
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_liquidCooling}}
                                 </td>
@@ -215,6 +260,10 @@
                                 <th scope="row">
                                     Air Cooling
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>
                                     {{build.build_airCooling}}
                                 </td>
@@ -229,6 +278,10 @@
                                 <th scope="row">
                                     Total Price
                                 </th>
+                                {%if user.is_authenticated %}
+                                <td>        
+                                </td>
+                                {%endif%}
                                 <td>                 
                                 </td>
                                 <td>
