@@ -3,7 +3,7 @@ import re
 from urllib.parse import uses_relative
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import redirect, render
-from .forms import RecommendForm, RecoveryForm, SignupForm, LoginForm
+from .forms import ChangePasswordForm, RecommendForm, RecoveryForm, SignupForm, LoginForm
 from django.contrib.auth.models import User
 from .models import CPU, LiquidCooling, AirCooling, MotherBoard, PowerSupply, GPU, Memory, Storage, Case, Build
 from django.conf import settings
@@ -35,7 +35,7 @@ def get_cpu(request):
     if cpu.build_cpu is not None:
         cpu.save()
         return redirect('../build')
-    return render(request, 'cpu.html', context, )
+    return render(request, 'cpu.html', context)
 
 
 def get_gpu(request):
@@ -451,8 +451,8 @@ def showRecoveryPage(request):
                 user = User.objects.get(email=email)
                 password = user.password
                 subject = 'Monkee PC Builder Password Recovery'
-                message = 'Hey there, You forgot your password, here it is!\n'
-                message += 'Password: ' + password
+                message = 'Hey there, You forgot your password, use this link to reset it!\n'
+                message += 'http://localhost:8000/newpassword/'
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [email]
                 send_mail(subject=subject, message=message,
@@ -465,3 +465,32 @@ def showRecoveryPage(request):
         form = RecoveryForm()
     context = {'form': form, 'submitbutton': submitbutton}
     return render(request, 'recovery.html', context)
+
+def newPasswordView(request):
+    submitbutton = request.POST.get("submit")
+    password1 = ''
+    password2 = ''
+    username = ''
+    if request.method =='POST':
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            password1 = form.cleaned_data.get("password")
+            password2 = form.cleaned_data.get("password2")
+            username = form.cleaned_data.get("username")
+            if password1 == password2:
+                try:
+                    user = User.objects.get(username = username)
+                    user.set_password(password1)
+                    user.save()
+                    messages.success(request, "Password Changed!")
+                    return redirect('../')
+                except User.DoesNotExist:
+                    messages.error(request, "This is user does not exist!")
+            else:
+                messages.error(request, "The passwords don't match!")
+                return redirect('')
+    else:
+        form = ChangePasswordForm()
+        context = {'form': form, 'submitbutton':submitbutton}
+        return render(request, 'newPassword.html', context)
+

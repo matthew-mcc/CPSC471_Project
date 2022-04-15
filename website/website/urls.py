@@ -50,6 +50,7 @@ urlpatterns = [
     path('recommendBuild/', views.renderRecommendedBuild, name='recommendBuild'),
     path('recovery/', views.showRecoveryPage, name ='recovery'),
     path('logout/', views.logoutView, name = 'logout'),
+    path('newpassword/', views.newPasswordView, name = 'newpassword'),
     path('openapi', get_schema_view(
         title="MonkeBuilderAPI",
         description="API for PC builder site",
